@@ -1,0 +1,251 @@
+.apiset-settings {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+
+}
+
+/* Section wrapper */
+.apiset-section {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    margin-bottom: 8px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 8px var(--shadow);
+
+}
+
+.apiset-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+
+
+.apiset-section-subtitle {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+}
+
+/* Simple grid for fields */
+.apiset-section-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+}
+
+.apiset-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.apiset-field label {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+
+
+}
+
+.apiset-field input,
+.apiset-field select {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+
+}
+
+.apiset-field input:focus,
+.apiset-field select:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.apiset-inline {
+    display: flex;
+    align-items: left;
+    gap: 8px;
+}
+
+.apiset-inline button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.apiset-inline-extend {
+    display: flex;
+    align-items: left;
+    gap: 8px;
+}
+
+.apiset-inline-extend input,
+.apiset-inline-extend select {
+    width: 80%;
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.apiset-inline-extend button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.apiset-box {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.apiset-box input {
+    width: 70px;
+}
+
+.btn-primary {
+    background-color: var(--primaryBg);
+    color: var(--primaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    margin-top: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-secondary {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+.apiset-help-text {
+    font-size: 0.8rem;
+    color: var(--textMuted);
+    margin-top: 6px;
+}
+
+/* API keys section specific */
+.api-keys-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+}
+
+/* Services section */
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+}
+
+/* Manager settings */
+.manager-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.apiset-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    position: relative;
+    /* container for fade overlays */
+}
+
+/* Removed local apiset-scroll fades — using settings-tabs content edge softening to avoid double overlays */
+/* Scrollbar styling */
+.apiset-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.apiset-scroll::-webkit-scrollbar-thumb {
+    background: var(--panelBorder);
+    border-radius: 4px;
+}
+
+.apiset-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* -------------------------------------------------------
+   Button gloss overlay applied globally to prominent buttons
+   ------------------------------------------------------- */
+button,
+.btn-primary,
+.btn-secondary,
+.primary-btn,
+.secondary-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+button::before,
+.btn-primary::before,
+.btn-secondary::before,
+.primary-btn::before,
+.secondary-btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .18s ease, transform .18s ease;
+    opacity: 0.9;
+}
+
+button:hover::before,
+.btn-primary:hover::before,
+.btn-secondary:hover::before,
+.primary-btn:hover::before,
+.secondary-btn:hover::before {
+    opacity: 1;
+    transform: translateY(0.5px);
+}
+
+/* Ensure button content appears above the gloss */
+button>*,
+.btn-primary>*,
+.btn-secondary>*,
+.primary-btn>*,
+.secondary-btn>* {
+    position: relative;
+    z-index: 2;
+}
+
+.apiset-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--panelBorder);
+    border-radius: 8px;
+    display: flex;
+    justify-content: flex-end;
+    background: var(--panelBg);
+    box-shadow: 0 4px 8px var(--shadow);
+}

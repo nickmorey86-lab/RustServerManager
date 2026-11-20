@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "target": "ESNext",
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "verbatimModuleSyntax": false,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "strict": true,
+        "jsx": "react-jsx"
+    },
+    "include": [
+        "src",
+        "electron.ts",
+        "preload.ts",
+        "vite.config.ts"
+    ]
+}

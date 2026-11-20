@@ -1,0 +1,245 @@
+.langfil-settings {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Section wrapper */
+.langfil-section {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    margin-bottom: 8px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.langfil-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.langfil-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.langfil-section-subtitle {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+}
+
+/* Simple grid for fields */
+.langfil-section-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+}
+
+.langfil-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+}
+
+.langfil-field label {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+}
+
+.langfil-field input,
+.langfil-field select,
+.langfil-textarea {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+
+}
+
+.langfil-textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.35;
+}
+
+.langfil-field input:focus,
+.langfil-field select:focus,
+.langfil-textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.langfil-inline {
+    display: flex;
+    align-items: left;
+    gap: 8px;
+}
+
+.langfil-inline-numb {
+    display: flex;
+    align-items: left;
+    gap: 8px;
+}
+
+.langfil-inline-numb input {
+    width: 50px;
+}
+
+.langfil-inline-text {
+    display: flex;
+    align-items: left;
+    gap: 8px;
+}
+
+.langfil-inline-text input {
+    width: 100%;
+}
+
+.langfil-inline button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.langfil-footer,
+.langfil-footer .langfil-inline {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+
+.langfil-settings .btn-primary {
+    background-color: var(--primaryBg);
+    color: var(--primaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    margin-top: 4px;
+    position: relative;
+    overflow: hidden;
+    margin-left: auto;
+}
+
+
+.langfil-settings .btn-secondary {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+}
+
+.langfil-settings .btn-alt {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font);
+}
+
+.langfil-settings .btn-del {
+    background-color: var(--dangerBg) !important;
+    color: var(--dangerText) !important;
+    border: 1px solid var(--panelBorder);
+    font-family: var(--font);
+}
+
+
+.langfil-help-text {
+    font-size: 0.8rem;
+    color: var(--textMuted);
+}
+
+.langfil-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Scrollbar styling */
+.langfil-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.langfil-scroll::-webkit-scrollbar-thumb {
+    background: var(--panelBorder);
+    border-radius: 4px;
+}
+
+.langfil-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Button gloss overlay scoped to LanguageFilter page only */
+.langfil-settings button,
+.langfil-settings .btn-primary,
+.langfil-settings .btn-secondary,
+.langfil-settings .primary-btn,
+.langfil-settings .secondary-btn,
+.langfil-settings .btn-alt,
+.langfil-settings .btn-del {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.langfil-settings button::before,
+.langfil-settings .btn-primary::before,
+.langfil-settings .btn-secondary::before,
+.langfil-settings .primary-btn::before,
+.langfil-settings .secondary-btn::before,
+.langfil-settings .btn-alt::before,
+.langfil-settings .btn-del::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .18s ease, transform .18s ease;
+    opacity: 0.9;
+}
+
+.langfil-settings button:hover::before,
+.langfil-settings .btn-primary:hover::before,
+.langfil-settings .btn-secondary:hover::before,
+.langfil-settings .primary-btn:hover::before,
+.langfil-settings .secondary-btn:hover::before,
+.langfil-settings .btn-alt:hover::before,
+.langfil-settings .btn-del:hover::before {
+    opacity: 1;
+    transform: translateY(0.5px);
+}
+
+/* Ensure button content appears above the gloss */
+.langfil-settings button>*,
+.langfil-settings .btn-primary>*,
+.langfil-settings .btn-secondary>*,
+.langfil-settings .primary-btn>*,
+.langfil-settings .secondary-btn>* .btn-alt>* .btn-del>* {
+    position: relative;
+    z-index: 2;
+}
+
+.langfil-footer {
+    padding: 10px 0 0 0;
+}

@@ -1,0 +1,23 @@
+.settings-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: var(--text);
+
+    height: 100%;
+    /* NEW */
+    min-height: 0;
+    /* NEW */
+}
+
+.settings-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    flex: 1;
+    /* NEW */
+    min-height: 0;
+    /* NEW */
+}

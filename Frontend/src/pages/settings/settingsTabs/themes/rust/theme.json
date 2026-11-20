@@ -1,0 +1,42 @@
+{
+  "id": "rust",
+  "name": "Rust",
+  "font": "fonts/rust.ttf",
+  "bodyFont": "fonts/orbitron.ttf",
+  "isDefault": true,
+  "logo": "/images/rust-logo.png",
+  "icons": {
+    "dashboard": "/icons/dashboard.png",
+    "servers": "/icons/servers.png",
+    "players": "/icons/players.png",
+    "console": "/icons/console.png",
+    "settings": "/icons/settings.png",
+    "carbon": "/icons/carbon.png",
+    "oxide": "/icons/oxide.png",
+    "serverinstaller": "/icons/serverinstaller.png",
+    "pluginmanager": "/icons/pluginmanager.png"
+  },
+  "colors": {
+    "background": "radial-gradient(circle at top left, rgba(239, 68, 68, 0.18), rgba(15, 23, 42, 0.95))",
+    "text": "#ffffff",
+    "textMuted": "#aaaaaa",
+    "sidebarBg": "#111111",
+    "sidebarText": "#ffffff",
+    "sidebarHover": "#222222",
+    "sidebarActive": "#333333",
+    "panelBg": "#1a1a1a",
+    "panelBorder": "#2a2a2a",
+    "panelShadow": "rgba(0,0,0,0.4)",
+    "primaryBg": "#ff2a2a",
+    "primaryText": "#ffffff",
+    "secondaryBg": "#444444",
+    "secondaryText": "#ffffff",
+    "dangerBg": "#330000",
+    "dangerText": "#ff4444",
+    "statusOnline": "#22c55e",
+    "statusOffline": "#ef4444",
+    "shadow": "rgba(255, 200, 200, 0.10)",
+    "addThemeHover": "#b81b1b",
+    "accent": "#d9534f"
+  }
+}

@@ -1,0 +1,52 @@
+.players-root {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+    overflow-y: auto;
+    background: var(--colorBg);
+    color: var(--colorText);
+}
+
+.players-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.player-card {
+    background: var(--colorPanelBg);
+    border: 1px solid var(--colorPanelBorder);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px var(--colorPanelShadow);
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.player-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.player-status.online {
+    color: var(--statusOnline);
+}
+
+.player-status.offline {
+    color: var(--statusOffline);
+}
+
+.player-actions {
+    display: flex;
+    gap: 10px;
+}

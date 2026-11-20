@@ -1,0 +1,214 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    -webkit-backdrop-filter: blur(14px);
+    backdrop-filter: blur(14px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    z-index: 9999;
+
+}
+
+.modal-settings {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Section wrapper */
+.modal-section {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    margin-bottom: 8px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 8px var(--shadow);
+
+
+}
+
+.modal-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font: var(--primaryText);
+    color: var(--text);
+    font-family: var(--font);
+
+}
+
+.modal-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.modal-section-subtitle {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+}
+
+/* Simple grid for fields */
+.modal-section-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+    font-family: var(--font-body);
+
+}
+
+.modal-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.modal-field:nth-child(2) {
+    margin-top: 44px;
+}
+
+.modal-field label {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+
+
+}
+
+.modal-field input,
+.modal-field select {
+    width: 100%;
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+.modal-field input[type="checkbox"],
+.modal-field input[type="checkbox"] {
+    width: auto;
+}
+
+.modal-field input:focus,
+.modal-field select:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.modal-inline {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.modal-inline button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--primaryBg);
+    color: var(--primaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    margin-top: 4px;
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font);
+}
+
+.btn-secondary {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font);
+}
+
+.modal-help-text {
+    font-size: 0.8rem;
+    color: var(--textMuted);
+    margin-top: 6px;
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 16px;
+    gap: 12px;
+}
+
+.modal-footer .btn-secondary {
+    margin-left: auto;
+}
+
+/* -------------------------------------------------------
+   Button gloss overlay applied globally to prominent buttons
+   ------------------------------------------------------- */
+button,
+.btn-primary,
+.btn-secondary,
+.primary-btn,
+.secondary-btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+button::before,
+.btn-primary::before,
+.btn-secondary::before,
+.primary-btn::before,
+.secondary-btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .18s ease, transform .18s ease;
+    opacity: 0.9;
+}
+
+button:hover::before,
+.btn-primary:hover::before,
+.btn-secondary:hover::before,
+.primary-btn:hover::before,
+.secondary-btn:hover::before {
+    opacity: 1;
+    transform: translateY(0.5px);
+}
+
+/* Ensure button content appears above the gloss */
+button>*,
+.btn-primary>*,
+.btn-secondary>*,
+.primary-btn>*,
+.secondary-btn>* {
+    position: relative;
+    z-index: 2;
+}

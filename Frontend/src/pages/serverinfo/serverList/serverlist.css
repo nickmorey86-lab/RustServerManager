@@ -1,0 +1,68 @@
+.server-list-root {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.server-card {
+    background: var(--colorPanelBg);
+    border: 1px solid var(--colorPanelBorder);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: 0 4px 12px var(--colorPanelShadow);
+}
+
+.server-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.server-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--colorText);
+}
+
+.server-status.online {
+    color: var(--statusOnline);
+}
+
+.server-status.offline {
+    color: var(--statusOffline);
+}
+
+.server-card-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.server-btn {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.server-btn.start {
+    background: var(--primaryBg);
+    color: var(--primaryText);
+}
+
+.server-btn.stop {
+    background: var(--dangerBg);
+    color: var(--dangerText);
+}
+
+.server-btn.secondary {
+    background: var(--secondaryBg);
+    color: var(--secondaryText);
+}

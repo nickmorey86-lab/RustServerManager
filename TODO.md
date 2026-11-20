@@ -1,0 +1,3 @@
+- [ ] Add missing Electron IPC handler `fonts:list` in `Frontend/electron.ts` (list font filenames from public/fonts / bundled assets)
+- [ ] Fix built-in theme copy-on-startup logic in `Frontend/electron.ts` to “repair/complete” missing theme folders/files instead of skipping when destination folder exists
+- [ ] Run a quick typecheck/build to ensure IPC/channel + TS types compile

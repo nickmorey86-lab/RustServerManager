@@ -1,0 +1,24 @@
+.pluginmanager {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.pluginmanager-card {
+    background: var(--colorPanelBg);
+    border: 1px solid var(--colorPanelBorder);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px var(--colorPanelShadow);
+}
+
+.pluginmanager-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--colorText);
+}

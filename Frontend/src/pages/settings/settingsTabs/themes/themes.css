@@ -1,0 +1,43 @@
+/* -------------------------------------------------------
+   PAGE LAYOUT
+------------------------------------------------------- */
+
+.themes-page {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 24px;
+    color: var(--colorText);
+}
+
+
+/* -------------------------------------------------------
+   THEMES GRID
+------------------------------------------------------- */
+
+.theme-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    padding-top: 8px
+}
+
+/* -------------------------------------------------------
+   ADD THEME BUTTON
+------------------------------------------------------- */
+.add-theme-btn {
+    padding: 10px 16px;
+    gap: 10px;
+    background: var(--primaryBg);
+    color: var(--primaryText);
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font);
+}
+
+.add-theme-btn:hover {
+    background: var(--addThemeHover);
+}

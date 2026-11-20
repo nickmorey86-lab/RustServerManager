@@ -1,0 +1,21 @@
+.general-page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+.general-container {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    overflow: visible;
+    flex-direction: column;
+}
+
+.general-content {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: 16px;
+}

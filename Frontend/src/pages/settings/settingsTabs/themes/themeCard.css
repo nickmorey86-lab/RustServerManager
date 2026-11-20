@@ -1,0 +1,234 @@
+.theme-card {
+    background: var(--theme-card-bg);
+    border: 1px solid var(--colorPanelBorder);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow: 0 4px 12px var(--colorPanelShadow);
+    font-family: var(--card-font-body, inherit);
+}
+
+.theme-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--card-glow);
+    transition: box-shadow 0.25s ease, transform 0.25s ease;
+    transform: translateY(-2px) scale(1.015);
+
+}
+
+.theme-card.active {
+    border-color: var(--primaryBg);
+    box-shadow: 0 0 15px var(--card-glow);
+    transform: translateY(-1px);
+}
+
+.theme-font-title {
+    font-family: var(--card-font-title, inherit);
+    color: var(--card-text);
+    margin: auto;
+}
+
+.theme-font-body {
+    font-family: var(--card-font-body, inherit);
+    color: var(--card-text-muted);
+    margin: auto;
+}
+
+.theme-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+
+.theme-tag {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-tag::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .18s ease, transform .18s ease;
+    opacity: 0.9;
+}
+
+.theme-preview-btn {
+    background: var(--card-primary-bg);
+    color: var(--card-primary-text);
+    font-family: var(--card-font-title);
+}
+
+.theme-tags {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+
+.theme-tag.default {
+    background: var(--secondaryBg);
+    color: var(--secondaryText);
+}
+
+.theme-tag.custom {
+    background: var(--secondaryBg);
+    color: var(--secondaryText);
+}
+
+.theme-active-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--primaryBg);
+    color: var(--primaryText);
+    margin-left: auto;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-active-badge::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .18s ease, transform .18s ease;
+    opacity: 0.9;
+}
+
+.theme-card-logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.theme-edit-btn,
+.theme-delete-btn,
+.theme-preview-btn {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.theme-edit-btn {
+    background: var(--card-primary-bg);
+    color: var(--card-primary-text);
+    font-family: var(--card-font-title);
+}
+
+.theme-edit-btn:hover {
+    background: var(--sidebarHover);
+}
+
+.theme-delete-btn {
+    background: var(--card-dangerBg);
+    color: var(--card-dangerText);
+    font-family: var(--card-font-title);
+    margin-left: auto;
+}
+
+/* Gloss effect for theme card buttons */
+.theme-edit-btn::before,
+.theme-delete-btn::before,
+.theme-preview-btn::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .18s ease, transform .18s ease;
+    opacity: 0.9;
+}
+
+.theme-edit-btn:hover::before,
+.theme-delete-btn:hover::before,
+.theme-preview-btn:hover::before {
+    opacity: 1;
+    transform: translateY(0.5px);
+}
+
+/* Ensure button content appears above the gloss */
+.theme-edit-btn>*,
+.theme-delete-btn>*,
+.theme-preview-btn>* {
+    position: relative;
+    z-index: 2;
+}
+
+.theme-tags,
+.theme-tag,
+.theme-active-badge {
+    font-family: Inter, system-ui, sans-serif !important;
+}
+
+/* RUST THEME PREVIEW
+.theme-card.theme-rust {
+    --card-bg: radial-gradient(circle at top left, rgba(239, 68, 68, 0.18), rgba(15, 23, 42, 0.95));
+    --card-text: #ffffff;
+    --card-text-muted: #aaaaaa;
+    --card-primary-bg: #ff2a2a;
+    --card-primary-text: #ffffff;
+    --card-font-title: rust;
+    --card-font-body: rust-body;
+    --card-glow: rgba(239, 68, 68, 0.35);
+}
+
+
+ MIDNIGHT THEME PREVIEW 
+.theme-card.theme-midnight {
+    --card-bg: radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), rgba(2, 6, 23, 0.95));
+    --card-text: #e5e7eb;
+    --card-text-muted: #64748b;
+    --card-primary-bg: #22d3ee;
+    --card-primary-text: #020617;
+    --card-font-title: midnight;
+    --card-font-body: midnight-body;
+    --card-glow: rgba(56, 189, 248, 0.35);
+}
+
+
+SLATE THEME PREVIEW 
+.theme-card.theme-slate {
+    --card-bg: radial-gradient(circle at top left, rgba(149, 161, 178, 0.25), rgba(255, 255, 255, 0.95));
+    --card-text: #e2e8f0;
+    --card-text-muted: #94a3b8;
+    --card-primary-bg: #64748b;
+    --card-primary-text: #0f172a;
+    --card-font-title: slate;
+    --card-font-body: slate-body;
+    --card-glow: rgba(149, 161, 178, 0.35);
+}*/

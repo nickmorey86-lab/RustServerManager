@@ -1,0 +1,268 @@
+.general-settings {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+
+}
+
+/* Section wrapper */
+.general-section {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    margin-bottom: 8px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 8px var(--shadow);
+
+}
+
+.general-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.general-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.general-section-subtitle {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+}
+
+/* Simple grid for fields */
+.general-section-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+}
+
+.general-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.general-field label {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+
+
+}
+
+.general-field input,
+.general-field select {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+
+}
+
+.general-field input:focus,
+.general-field select:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.general-inline {
+    display: flex;
+    align-items: left;
+    gap: 8px;
+}
+
+.general-inline button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.general-settings .btn-primary {
+    background-color: var(--primaryBg);
+    color: var(--primaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    margin-top: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.general-settings .btn-secondary {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+}
+
+.general-settings .btn-alt {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+    margin-left: auto;
+    font-family: var(--font);
+
+}
+
+.general-settings .btn-del {
+    background-color: var(--dangerBg) !important;
+    color: var(--dangerText) !important;
+    border: 1px solid var(--panelBorder);
+    font-family: var(--font);
+
+}
+
+
+
+.general-help-text {
+    font-size: 0.8rem;
+    color: var(--textMuted);
+    margin-top: 6px;
+}
+
+/* API keys section specific */
+.api-keys-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+}
+
+/* Services section */
+.services-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 24px;
+}
+
+/* Manager settings */
+.manager-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.general-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    position: relative;
+    /* container for fade overlays */
+}
+
+/* Removed local general-scroll fades — using settings-tabs content edge softening to avoid double overlays */
+/* Scrollbar styling */
+.general-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.general-scroll::-webkit-scrollbar-thumb {
+    background: var(--panelBorder);
+    border-radius: 4px;
+}
+
+.general-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* -------------------------------------------------------
+   Button gloss overlay (scoped to ChatRules page)
+   ------------------------------------------------------- */
+.general-settings button,
+.general-settings .btn-primary,
+.general-settings .btn-secondary,
+.general-settings .primary-btn,
+.general-settings .secondary-btn,
+.general-settings .btn-alt,
+.general-settings .btn-del {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.general-settings button::before,
+.general-settings .btn-primary::before,
+.general-settings .btn-secondary::before,
+.general-settings .primary-btn::before,
+.general-settings .secondary-btn::before,
+.general-settings .btn-alt::before,
+.general-settings .btn-del::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .18s ease, transform .18s ease;
+    opacity: 0.9;
+}
+
+.general-settings button:hover::before,
+.general-settings .btn-primary:hover::before,
+.general-settings .btn-secondary:hover::before,
+.general-settings .primary-btn:hover::before,
+.general-settings .secondary-btn:hover::before,
+.general-settings .btn-alt:hover::before,
+.general-settings .btn-del:hover::before {
+    opacity: 1;
+    transform: translateY(0.5px);
+}
+
+/* Ensure button content appears above the gloss */
+.general-settings button>*,
+.general-settings .btn-primary>*,
+.general-settings .btn-secondary>*,
+.general-settings .primary-btn>*,
+.general-settings .secondary-btn>* .btn-alt>* .btn-del>* {
+    position: relative;
+    z-index: 2;
+}
+
+
+.rule-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    padding-top: 8px
+}
+
+/* Rule list body layout - flex instead of grid */
+.general-section-body.rule-body {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.rule-summary-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* ChatRules getRuleSummary renders a <ul> inside .rule-summary-list */
+.rule-summary-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rule-summary-list li {
+    list-style: none;
+}

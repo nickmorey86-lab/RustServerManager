@@ -1,0 +1,16 @@
+{
+  "autoKick": true,
+  "autoBan": true,
+  "banIP": true,
+  "banHours": 4,
+  "banVoilations": true,
+  "banVioNo": 1,
+  "banXbans": true,
+  "xBansHours": 1,
+  "banVAC": true,
+  "vacBans": 1,
+  "banGame": true,
+  "gamBanHours": 1,
+  "daysSinceLast": true,
+  "lastBanHours": 1
+}

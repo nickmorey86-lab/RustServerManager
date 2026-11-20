@@ -1,0 +1,33 @@
+.modal-error-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+}
+
+.modal-error-header h3 {
+    margin: 0;
+}
+
+.modal-error-close {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: inherit;
+    border-radius: 8px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+.modal-error-body {
+    margin-top: 12px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: inherit;
+    color: var(--colorText, #fff);
+}
+
+.modal-error-footer {
+    margin-top: 14px;
+    display: flex;
+    justify-content: flex-end;
+}

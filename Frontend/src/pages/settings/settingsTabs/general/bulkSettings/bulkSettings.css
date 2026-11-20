@@ -1,0 +1,133 @@
+.general-tab {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 0;
+}
+
+
+
+.general-tabs-sidebar {
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid var(--panelBorder);
+    margin-bottom: 8px;
+    background: var(--sidebarBg);
+    border-radius: 8px;
+    position: relative;
+    /* ensure sidebar sits above internal fades */
+    z-index: 20;
+
+}
+
+.general-tabs-sidebar :after {
+    content: "";
+    display: block;
+    width: 95%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 5px auto;
+    transition: opacity 200ms ease, transform 200ms ease;
+
+    ;
+}
+
+.general-tabs-sidebar button {
+    background: transparent;
+    border: none;
+    padding: 8px 14px;
+    color: var(--textMuted);
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 6px;
+    transition: background 0.15s ease, color 0.15s ease;
+    font-family: var(--font);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    margin-left: 1px;
+}
+
+.general-tabs-sidebar button.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    border-radius: 0 4px 4px 0;
+    opacity: 0.9;
+}
+
+
+.general-tabs-sidebar button:hover {
+    background: var(--sidebarHover);
+    color: var(--text);
+    transform: translateY(-2px);
+
+}
+
+
+.general-tabs-sidebar button.tab-active {
+    background: var(--sidebarActive);
+    color: var(--text);
+    border-left: 3px solid var(--accent);
+    padding-left: calc(1rem - 3px);
+}
+
+.general-tabs-content {
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 8px;
+}
+
+.tab-wrapper {
+    width: 100%;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Exit animation: old page slides out to the right */
+.tab-wrapper.tab-exit {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+/* Enter animation: new page slides in from the left */
+.tab-wrapper.tab-enter {
+    position: relative;
+    z-index: 2;
+}
+
+.tab-wrapper.tab-enter.animating {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.general-tabs-sidebar button {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.general-tabs-sidebar .tab-active {
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 3px solid var(--accent);
+    padding-left: calc(1rem - 3px);
+}
+
+.general-tabs-sidebar .tab-active:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+}
+
+.general-tabs-sidebar button:hover {
+    background: rgba(255, 255, 255, 0.05);
+}

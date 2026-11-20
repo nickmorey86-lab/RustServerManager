@@ -1,0 +1,240 @@
+.otherstuff-settings {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Section wrapper */
+.otherstuff-section {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    margin-bottom: 8px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.otherstuff-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.otherstuff-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.otherstuff-section-subtitle {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+}
+
+.otherstuff-section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+}
+
+.otherstuff-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+
+}
+
+.otherstuff-field label {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+}
+
+.otherstuff-field input,
+.otherstuff-field select,
+.otherstuff-textarea {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.otherstuff-textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.35;
+    width: 100%;
+}
+
+.otherstuff-field input:focus,
+.otherstuff-field select:focus,
+.otherstuff-textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.otherstuff-inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.otherstuff-inline-numb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.otherstuff-inline-numb input {
+    max-width: 45px;
+
+}
+
+
+
+.otherstuff-inline button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    font-size: 0.85rem;
+    cursor: pointer;
+
+}
+
+.otherstuff-footer,
+.otherstuff-footer .otherstuff-inline {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+
+.otherstuff-settings .btn-primary {
+    background-color: var(--primaryBg);
+    color: var(--primaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    margin-top: 4px;
+    position: relative;
+    overflow: hidden;
+    margin-left: auto;
+}
+
+
+.otherstuff-settings .btn-secondary {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+}
+
+.otherstuff-settings .btn-alt {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font);
+}
+
+.otherstuff-settings .btn-del {
+    background-color: var(--dangerBg) !important;
+    color: var(--dangerText) !important;
+    border: 1px solid var(--panelBorder);
+    font-family: var(--font);
+}
+
+
+.otherstuff-help-text {
+    font-size: 0.8rem;
+    color: var(--textMuted);
+}
+
+.otherstuff-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Scrollbar styling */
+.otherstuff-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.otherstuff-scroll::-webkit-scrollbar-thumb {
+    background: var(--panelBorder);
+    border-radius: 4px;
+}
+
+.otherstuff-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Button gloss overlay scoped to LanguageFilter page only */
+.otherstuff-settings button,
+.otherstuff-settings .btn-primary,
+.otherstuff-settings .btn-secondary,
+.otherstuff-settings .primary-btn,
+.otherstuff-settings .secondary-btn,
+.otherstuff-settings .btn-alt,
+.otherstuff-settings .btn-del {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.otherstuff-settings button::before,
+.otherstuff-settings .btn-primary::before,
+.otherstuff-settings .btn-secondary::before,
+.otherstuff-settings .primary-btn::before,
+.otherstuff-settings .secondary-btn::before,
+.otherstuff-settings .btn-alt::before,
+.otherstuff-settings .btn-del::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .18s ease, transform .18s ease;
+    opacity: 0.9;
+}
+
+.otherstuff-settings button:hover::before,
+.otherstuff-settings .btn-primary:hover::before,
+.otherstuff-settings .btn-secondary:hover::before,
+.otherstuff-settings .primary-btn:hover::before,
+.otherstuff-settings .secondary-btn:hover::before,
+.otherstuff-settings .btn-alt:hover::before,
+.otherstuff-settings .btn-del:hover::before {
+    opacity: 1;
+    transform: translateY(0.5px);
+}
+
+/* Ensure button content appears above the gloss */
+.otherstuff-settings button>*,
+.otherstuff-settings .btn-primary>*,
+.otherstuff-settings .btn-secondary>*,
+.otherstuff-settings .primary-btn>*,
+.otherstuff-settings .secondary-btn>* .btn-alt>* .btn-del>* {
+    position: relative;
+    z-index: 2;
+}
+
+.otherstuff-footer {
+    padding: 10px 0 0 0;
+}

@@ -1,0 +1,56 @@
+.server-details-root {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 100%;
+    overflow-y: auto;
+    background: var(--colorBg);
+    color: var(--colorText);
+}
+
+.server-details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.server-details-title {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.server-details-tabs {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid var(--colorPanelBorder);
+    padding-bottom: 8px;
+}
+
+.server-details-tabs button {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--colorPanelBorder);
+    background: var(--colorPanelBg);
+    color: var(--colorText);
+    cursor: pointer;
+    transition: 0.15s ease;
+}
+
+.server-details-tabs button:hover {
+    background: var(--sidebarHover);
+}
+
+.server-details-tabs .active {
+    background: var(--sidebarActive);
+    border-color: var(--sidebarHover);
+}
+
+.server-details-panel {
+    background: var(--colorPanelBg);
+    border: 1px solid var(--colorPanelBorder);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px var(--colorPanelShadow);
+}

@@ -1,0 +1,157 @@
+//import "./generalSubPages.css";
+import { useState } from "react";
+
+
+interface AntiChatSpamRule {
+    ruleName: string;
+    enabled: boolean;
+    AmountLastMins: string;
+    ViolationRateExceeds: string;
+    SameMessageMoreThan: string;
+    MaxViolationsBeforeAction: string;
+    Action: "Kick" | "Ban" | "Mute";
+}
+
+
+export function ChatSettings() {
+
+    const [rules, setRules] = useState<AntiChatSpamRule[]>([]);
+
+    const addRule = () => {
+        setRules([
+            ...rules,
+            {
+                ruleName: "",
+                enabled: false,
+                AmountLastMins: "",
+                ViolationRateExceeds: "",
+                SameMessageMoreThan: "",
+                MaxViolationsBeforeAction: "",
+                Action: "Kick"
+            }
+        ]);
+    };
+
+    const removeRule = (index: number) => {
+        setRules(rules.filter((_, i) => i !== index));
+    };
+
+    const updateRule = (index: number, updates: Partial<AntiChatSpamRule>) => {
+        setRules(rules.map((rule, i) =>
+            i === index ? { ...rule, ...updates } : rule
+        ));
+    };
+
+
+    return (
+        <div className="general-scroll">
+            <div className="general-settings">
+
+                {/* Add Rule Button */}
+                <div className="general-inline">
+                    <button className="btn-primary" onClick={addRule}>
+                        Add Rule
+                    </button>
+                </div>
+
+                {/* Dynamic Rule List */}
+                {rules.map((rule, index) => (
+                    <section key={index} className="general-section">
+
+                        <div className="general-section-header">
+                            <div>Rule name</div>
+                            <div className="general-inline">
+                                <button
+                                    className="btn-secondary"
+                                    onClick={() => removeRule(index)}
+                                >
+                                    Remove
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="general-section-body anti-chat-grid">
+
+                            {/* Enabled */}
+                            <div className="general-field">
+                                <label>Enabled</label>
+                                <input
+                                    type="checkbox"
+                                    checked={rule.enabled}
+                                    onChange={(e) =>
+                                        updateRule(index, { enabled: e.target.checked })
+                                    }
+                                />
+                            </div>
+
+                            {/* AmountLastMins */}
+                            <div className="general-field">
+                                <label>Amount of messages in last X minutes</label>
+                                <input
+                                    type="number"
+                                    value={rule.AmountLastMins}
+                                    onChange={(e) =>
+                                        updateRule(index, { AmountLastMins: e.target.value })
+                                    }
+                                />
+                            </div>
+
+                            {/* ViolationRateExceeds */}
+                            <div className="general-field">
+                                <label>Violation if rate exceeds X messages/min</label>
+                                <input
+                                    type="number"
+                                    value={rule.ViolationRateExceeds}
+                                    onChange={(e) =>
+                                        updateRule(index, { ViolationRateExceeds: e.target.value })
+                                    }
+                                />
+                            </div>
+
+                            {/* SameMessageMoreThan */}
+                            <div className="general-field">
+                                <label>Violation if same message sent more than X times</label>
+                                <input
+                                    type="number"
+                                    value={rule.SameMessageMoreThan}
+                                    onChange={(e) =>
+                                        updateRule(index, { SameMessageMoreThan: e.target.value })
+                                    }
+                                />
+                            </div>
+
+                            {/* MaxViolationsBeforeAction */}
+                            <div className="general-field">
+                                <label>Max violations before action</label>
+                                <input
+                                    type="number"
+                                    value={rule.MaxViolationsBeforeAction}
+                                    onChange={(e) =>
+                                        updateRule(index, { MaxViolationsBeforeAction: e.target.value })
+                                    }
+                                />
+                            </div>
+
+                            {/* Action */}
+                            <div className="general-field">
+                                <label>Action</label>
+                                <select
+                                    value={rule.Action}
+                                    onChange={(e) =>
+                                        updateRule(index, { Action: e.target.value as any })
+                                    }
+                                >
+                                    <option value="Kick">Kick</option>
+                                    <option value="Ban">Ban</option>
+                                    <option value="Mute">Mute</option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </section>
+                ))}
+
+            </div>
+        </div>
+    )
+};

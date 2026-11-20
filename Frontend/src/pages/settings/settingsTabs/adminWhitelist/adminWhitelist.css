@@ -1,0 +1,282 @@
+.adminwhitelist-settings {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Section wrapper */
+.adminwhitelist-section {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    margin-bottom: 8px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.adminwhitelist-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.adminwhitelist-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.adminwhitelist-section-subtitle {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+}
+
+.adminwhitelist-section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+}
+
+.adminwhitelist-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+
+}
+
+.adminwhitelist-field label {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+}
+
+.adminwhitelist-field input,
+.adminwhitelist-field select,
+.adminwhitelist-textarea {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.adminwhitelist-textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.35;
+    width: 100%;
+}
+
+.adminwhitelist-field input:focus,
+.adminwhitelist-field select:focus,
+.adminwhitelist-textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.adminwhitelist-inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.adminwhitelist-inline-sec {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.adminwhitelist-inline-sec input {
+    width: 100%
+}
+
+.adminwhitelist-inline-numb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.adminwhitelist-inline-numb input {
+    max-width: 45px;
+
+}
+
+
+
+.adminwhitelist-inline button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    font-size: 0.85rem;
+    cursor: pointer;
+
+}
+
+.adminwhitelist-footer,
+.adminwhitelist-footer .adminwhitelist-inline {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+
+.adminwhitelist-settings .btn-primary {
+    background-color: var(--primaryBg);
+    color: var(--primaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    margin-top: 4px;
+    position: relative;
+    overflow: hidden;
+    margin-left: auto;
+}
+
+
+.adminwhitelist-settings .btn-secondary {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+}
+
+.adminwhitelist-settings .btn-alt {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font);
+}
+
+.adminwhitelist-settings .btn-del {
+    background-color: var(--dangerBg) !important;
+    color: var(--dangerText) !important;
+    border: 1px solid var(--panelBorder);
+    font-family: var(--font);
+}
+
+
+.adminwhitelist-help-text {
+    font-size: 0.8rem;
+    color: var(--textMuted);
+}
+
+.adminwhitelist-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Scrollbar styling */
+.adminwhitelist-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.adminwhitelist-scroll::-webkit-scrollbar-thumb {
+    background: var(--panelBorder);
+    border-radius: 4px;
+}
+
+.adminwhitelist-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Button gloss overlay scoped to LanguageFilter page only */
+.adminwhitelist-settings button,
+.adminwhitelist-settings .btn-primary,
+.adminwhitelist-settings .btn-secondary,
+.adminwhitelist-settings .primary-btn,
+.adminwhitelist-settings .secondary-btn,
+.adminwhitelist-settings .btn-alt,
+.adminwhitelist-settings .btn-del {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.adminwhitelist-settings button::before,
+.adminwhitelist-settings .btn-primary::before,
+.adminwhitelist-settings .btn-secondary::before,
+.adminwhitelist-settings .primary-btn::before,
+.adminwhitelist-settings .secondary-btn::before,
+.adminwhitelist-settings .btn-alt::before,
+.adminwhitelist-settings .btn-del::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .18s ease, transform .18s ease;
+    opacity: 0.9;
+}
+
+.adminwhitelist-settings button:hover::before,
+.adminwhitelist-settings .btn-primary:hover::before,
+.adminwhitelist-settings .btn-secondary:hover::before,
+.adminwhitelist-settings .primary-btn:hover::before,
+.adminwhitelist-settings .secondary-btn:hover::before,
+.adminwhitelist-settings .btn-alt:hover::before,
+.adminwhitelist-settings .btn-del:hover::before {
+    opacity: 1;
+    transform: translateY(0.5px);
+}
+
+/* Ensure button content appears above the gloss */
+.adminwhitelist-settings button>*,
+.adminwhitelist-settings .btn-primary>*,
+.adminwhitelist-settings .btn-secondary>*,
+.adminwhitelist-settings .primary-btn>*,
+.adminwhitelist-settings .secondary-btn>* .btn-alt>* .btn-del>* {
+    position: relative;
+    z-index: 2;
+}
+
+.adminwhitelist-footer {
+    padding: 10px 0 0 0;
+}
+
+.rule-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    padding-top: 8px
+}
+
+
+.adminwhitelist-section-body.rule-body {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.adminwhitelist-summary-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.adminwhitelist-summary-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.adminwhitelist-summary-list li {
+    list-style: none;
+}

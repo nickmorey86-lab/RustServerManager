@@ -1,0 +1,282 @@
+.servermessages-settings {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    height: 100%;
+    flex: 1;
+    min-height: 0;
+}
+
+/* Section wrapper */
+.servermessages-section {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    margin-bottom: 8px;
+    border-radius: 8px;
+    padding: 10px 15px;
+    box-shadow: 0 4px 8px var(--shadow);
+}
+
+.servermessages-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.servermessages-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.servermessages-section-subtitle {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+}
+
+.servermessages-section-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 24px;
+}
+
+.servermessages-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 5px;
+
+}
+
+.servermessages-field label {
+    font-size: 0.85rem;
+    color: var(--textMuted);
+}
+
+.servermessages-field input,
+.servermessages-field select,
+.servermessages-textarea {
+    background-color: var(--panelBg);
+    border: 1px solid var(--panelBorder);
+    border-radius: 4px;
+    padding: 6px 8px;
+    color: var(--text);
+    font-size: 0.9rem;
+}
+
+.servermessages-textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.35;
+    width: 100%;
+}
+
+.servermessages-field input:focus,
+.servermessages-field select:focus,
+.servermessages-textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+}
+
+.servermessages-inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.servermessages-inline-sec {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+}
+
+.servermessages-inline-sec input {
+    width: 100%
+}
+
+.servermessages-inline-numb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.servermessages-inline-numb input {
+    max-width: 45px;
+
+}
+
+
+
+.servermessages-inline button {
+    padding: 6px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    font-size: 0.85rem;
+    cursor: pointer;
+
+}
+
+.servermessages-footer,
+.servermessages-footer .servermessages-inline {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+
+.servermessages-settings .btn-primary {
+    background-color: var(--primaryBg);
+    color: var(--primaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    margin-top: 4px;
+    position: relative;
+    overflow: hidden;
+    margin-left: auto;
+}
+
+
+.servermessages-settings .btn-secondary {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+}
+
+.servermessages-settings .btn-alt {
+    background-color: var(--secondaryBg);
+    color: var(--secondaryText);
+    border-radius: 4px;
+    border: 1px solid var(--panelBorder);
+    position: relative;
+    overflow: hidden;
+    font-family: var(--font);
+}
+
+.servermessages-settings .btn-del {
+    background-color: var(--dangerBg) !important;
+    color: var(--dangerText) !important;
+    border: 1px solid var(--panelBorder);
+    font-family: var(--font);
+}
+
+
+.servermessages-help-text {
+    font-size: 0.8rem;
+    color: var(--textMuted);
+}
+
+.servermessages-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    position: relative;
+}
+
+/* Scrollbar styling */
+.servermessages-scroll::-webkit-scrollbar {
+    width: 8px;
+}
+
+.servermessages-scroll::-webkit-scrollbar-thumb {
+    background: var(--panelBorder);
+    border-radius: 4px;
+}
+
+.servermessages-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--accent);
+}
+
+/* Button gloss overlay scoped to LanguageFilter page only */
+.servermessages-settings button,
+.servermessages-settings .btn-primary,
+.servermessages-settings .btn-secondary,
+.servermessages-settings .primary-btn,
+.servermessages-settings .secondary-btn,
+.servermessages-settings .btn-alt,
+.servermessages-settings .btn-del {
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.servermessages-settings button::before,
+.servermessages-settings .btn-primary::before,
+.servermessages-settings .btn-secondary::before,
+.servermessages-settings .primary-btn::before,
+.servermessages-settings .secondary-btn::before,
+.servermessages-settings .btn-alt::before,
+.servermessages-settings .btn-del::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 50%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.02));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity .18s ease, transform .18s ease;
+    opacity: 0.9;
+}
+
+.servermessages-settings button:hover::before,
+.servermessages-settings .btn-primary:hover::before,
+.servermessages-settings .btn-secondary:hover::before,
+.servermessages-settings .primary-btn:hover::before,
+.servermessages-settings .secondary-btn:hover::before,
+.servermessages-settings .btn-alt:hover::before,
+.servermessages-settings .btn-del:hover::before {
+    opacity: 1;
+    transform: translateY(0.5px);
+}
+
+/* Ensure button content appears above the gloss */
+.servermessages-settings button>*,
+.servermessages-settings .btn-primary>*,
+.servermessages-settings .btn-secondary>*,
+.servermessages-settings .primary-btn>*,
+.servermessages-settings .secondary-btn>* .btn-alt>* .btn-del>* {
+    position: relative;
+    z-index: 2;
+}
+
+.servermessages-footer {
+    padding: 10px 0 0 0;
+}
+
+.rule-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+    padding-top: 8px
+}
+
+
+.servermessages-section-body.rule-body {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.servermessages-summary-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+
+.servermessages-summary-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.servermessages-summary-list li {
+    list-style: none;
+}
