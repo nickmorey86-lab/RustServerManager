@@ -1,4 +1,5 @@
 # Bug Fix Log
+
 ## B-001
 - Status: Open
 

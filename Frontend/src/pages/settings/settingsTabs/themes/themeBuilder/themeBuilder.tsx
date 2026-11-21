@@ -23,17 +23,17 @@ function slugify(name: string) {
 }
 
 // Helper: guess font format from filename
-function guessFormat(url: string) {
+/* function guessFormat(url: string) {
   const u = url.toLowerCase();
   if (u.endsWith(".woff2")) return "woff2";
   if (u.endsWith(".woff")) return "woff";
   if (u.endsWith(".ttf")) return "truetype";
   if (u.endsWith(".otf")) return "opentype";
   return "truetype";
-}
+} */
 
 // Add near top of ThemeBuilder.tsx (below imports)
-function normalizeBuiltinPath(path: string | null): string | null {
+/* function normalizeBuiltinPath(path: string | null): string | null {
   if (!path) return null;
   if (path.startsWith("/")) return path;
   if (path.startsWith("icons/")) {
@@ -49,7 +49,7 @@ function normalizeBuiltinPath(path: string | null): string | null {
     return fileName ? `/fonts/${fileName}` : null;
   }
   return path;
-}
+} */
 
 
 
@@ -345,7 +345,7 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
     }
 
     let cancelled = false;
-    const keys = ["dashboard", "servers", "players", "logs", "settings", "carbon", "oxide", "serverinstaller", "pluginmanager"];
+    const keys = ["dashboard", "servers", "players", "console", "settings", "carbon", "oxide", "serverinstaller", "pluginmanager"];
 
     const hasPerIcon = Object.values(iconUrls || {}).some(v => !!(v && v.trim()));
 
@@ -363,9 +363,9 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
           try {
             const res = await fetch(url, { method: "HEAD" });
             if (!res.ok) missing.push(k);
-          } catch (e) {
-            missing.push(k);
-          }
+          } catch {
+                  missing.push(k);
+}
         }));
       } else if (iconUrlBase && iconUrlBase.trim()) {
         const base = iconUrlBase.trim().replace(/\/+$/g, "") + "/";
