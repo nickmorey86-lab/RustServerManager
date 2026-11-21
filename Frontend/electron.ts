@@ -751,9 +751,9 @@ ipcMain.handle("rules:loadAll", () => {
   }
 });
 
-ipcMain.handle("rules:save", async (_event, rule: any) => {
+ipcMain.handle("rules:save", async (_event, rule: unknown) => {
   try {
-    const fileName = `${String(rule.ruleName ?? "rule").replace(/\s+/g, "_")}_${Date.now()}.json`;
+    const fileName = `${String((rule as { ruleName?: string }).ruleName ?? "rule").replace(/\s+/g, "_")}_${Date.now()}.json`;
     const filePath = path.join(userRulesDir, fileName);
     fs.writeFileSync(filePath, JSON.stringify(rule, null, 2), "utf8");
     return { success: true, fileName };
@@ -789,7 +789,7 @@ ipcMain.handle("apiServices:load", () => {
   }
 });
 
-ipcMain.handle("apiServices:save", async (_event, settings: any) => {
+ipcMain.handle("apiServices:save", async (_event, settings: unknown) => {
   try {
     fs.writeFileSync(userApiServicesPath, JSON.stringify(settings, null, 2), "utf8");
     return { success: true };

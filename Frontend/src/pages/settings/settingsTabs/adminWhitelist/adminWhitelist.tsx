@@ -79,8 +79,8 @@ export function AdminWhitelist() {
                 // settings.newAdminID / settings.steamID are strings (UI controlled inputs)
                 setSettings({
                     ...loaded,
-                    newAdminID: String((loaded as any).newAdminID ?? ""),
-                    steamID: String((loaded as any).steamID ?? ""),
+                    newAdminID: String(loaded.newAdminID ?? ""),
+                    steamID: String(loaded.steamID ?? ""),
                 });
             }
         })();

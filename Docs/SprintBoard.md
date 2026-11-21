@@ -4,6 +4,9 @@
 
 ### In Progress
 
+- [x] GitHub setup
+- [x] Documentation setup
+- [x] Folder structure mapping
 - [ ] Fix ThemeBuilder.tsx errors
 - [ ] Fix Theme Builder lock-up bug
 - [ ] Audit settings persistence

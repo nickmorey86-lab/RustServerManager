@@ -1,5 +1,27 @@
 # Known Issues
 
+## B-000
+
+Settings Persistence Audit
+
+Priority: Critical
+
+Status: Open
+
+Description: Determine where every Settings sub-tab stores data, where data is loaded from, and whether values are correctly restored into the UI.
+
+Affected Areas:
+
+Themes
+Server Messages
+Admin & Whitelist
+Chat Rules
+Language Filter
+Anti-Cheat
+Other Settings
+
+---
+
 ## B-001
 
 Theme Builder Lock-Up
@@ -68,4 +90,13 @@ Priority: High
 
 Status: Open
 
-Admins disappear after application restart. Likely requires integration with Rust admin files.
+Root Cause Identified
+
+The page currently persists only form input state.
+
+Admin table rows and whitelist table rows are stored in
+React state only and are never written to JSON.
+
+Upon reload only the form fields are restored.
+
+Tables are rebuilt from no data and therefore remain empty.
