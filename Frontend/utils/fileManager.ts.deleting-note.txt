@@ -1,1 +1,0 @@
-Deleting m:/RustServerManager/Frontend/utils/fileManager.ts as it is unused and renderer-incompatible (fs-based).

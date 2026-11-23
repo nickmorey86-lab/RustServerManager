@@ -12,7 +12,7 @@ async function build() {
     format: "cjs",
     outdir: "dist-electron",
     outExtension: { ".js": ".cjs" },
-    sourcemap: true,
+    sourcemap: false,
     external: ["electron"],
     loader: {
       ".png": "file",

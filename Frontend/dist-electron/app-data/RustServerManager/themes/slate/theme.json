@@ -1,0 +1,42 @@
+{
+  "id": "slate",
+  "name": "Slate",
+  "font": "fonts/montserrat.ttf",
+  "bodyFont": "fonts/inter.ttf",
+  "isDefault": true,
+  "logo": "images/slate-logo.png",
+  "icons": {
+    "dashboard": "icons/dashboard.png",
+    "servers": "icons/servers.png",
+    "players": "icons/players.png",
+    "console": "icons/console.png",
+    "settings": "icons/settings.png",
+    "carbon": "icons/carbon.png",
+    "oxide": "icons/oxide.png",
+    "serverinstaller": "icons/serverinstaller.png",
+    "pluginmanager": "icons/pluginmanager.png"
+  },
+  "colors": {
+    "background": "radial-gradient(circle at top left, rgba(149, 161, 178, 0.25), rgba(255, 255, 255, 0.95))",
+    "text": "#e2e8f0",
+    "textMuted": "#94a3b8",
+    "sidebarBg": "#1e293b",
+    "sidebarText": "#cbd5e1",
+    "sidebarHover": "rgba(255,255,255,0.05)",
+    "sidebarActive": "rgba(255,255,255,0.1)",
+    "panelBg": "#1e293b",
+    "panelBorder": "rgba(255,255,255,0.08)",
+    "panelShadow": "rgba(0,0,0,0.4)",
+    "primaryBg": "#64748b",
+    "primaryText": "#0f172a",
+    "secondaryBg": "rgba(148,163,184,0.12)",
+    "secondaryText": "#e2e8f0",
+    "dangerBg": "rgba(239,68,68,0.15)",
+    "dangerText": "#ef4444",
+    "statusOnline": "#22c55e",
+    "statusOffline": "#ef4444",
+    "shadow": "rgba(0, 0, 0, 0.25)",
+    "addThemeHover": "#3a3a3a",
+    "accent": "#9aa0a6"
+  }
+}
