@@ -1,27 +1,74 @@
 # Settings Issues and Work Required
 
-| Settings Tab | Issue / Bug Found | Work Required / Investigation Area | Priority |
-|---|---|---|---|
-| Themes | Theme Builder locks up after saving an incomplete theme. Fields become unusable until full app restart. | Investigate form state management, validation logic, controlled components, save process, and null/invalid theme objects. Prevent saving invalid themes. | 🔴 Critical |
-| Themes | TypeScript errors exist in `ThemeBuilder.tsx`. | Review and resolve all compile/lint errors before further development. | 🔴 Critical |
-| Themes | Uploaded fonts/icons display correctly, but edit fields do not repopulate selected values when editing. | Review theme loading and edit-state population logic. Ensure current selections are restored into controls. | 🟠 High |
-| Themes | URL-based font/icon themes fail due to missing fields/tabs. | Compare UI, theme schema, validation schema, and storage model. Add missing URL fields. | 🟠 High |
-| Themes | "Icon Pack OK" validation appears before all URL fields are populated. | Correct validation logic so the success message only displays when all required icon links exist. | 🟠 High |
-| Themes | Incomplete themes can currently be saved. | Implement mandatory field validation prior to saving. Disable save until requirements are satisfied. | 🟠 High |
-| Themes | No confirmation that the theme save/load process is actually reading back saved data correctly. | Perform a full persistence audit. Verify storage location, retrieval process, and UI population. | 🟠 High |
-| Admin | Added admins disappear after application restart. | Determine where admin data is currently stored. Likely move to reading/writing Rust admin configuration files. | 🟠 High |
-| Admin & Whitelist | Current admin system may not match the actual Rust server administration model. | Rebuild around actual server admin files rather than the application-only data store. | 🟡 Medium |
-| Admin & Whitelist | Whitelist functionality may duplicate Carbon functionality. | Review whether the whitelist should be removed, rebuilt, or integrated with Carbon's whitelist system. | 🟡 Medium |
-| Server Messages | Added messages disappear after restart. | Investigate the save/load pipeline and persistence location. Verify data is written and reloaded correctly. | 🔴 Critical |
-| Server Messages | Previously saved messages appear incorrectly in add/edit input fields. | Review form state reset logic and data-binding process. | 🔴 Critical |
-| Server Messages | Future functionality is not implemented. | Design integration with the server framework/chat command system once server control features exist. | 🟡 Medium |
-| General → | Functionality is not implemented. | Define supported API integrations and create a storage/configuration system. | 🟡 Medium |
-| General → | Saving appears functional, but backend integration is missing. | Verify persistence and later connect to moderation/chat enforcement systems. | 🟡 Medium |
-| General → Language Filter | No save confirmation is displayed. | Add a standard in-app notification. | 🟡 Medium |
-| General → Language Filter | Filtering functionality is not implemented. | Plan future integration with the moderation system. | 🟡 Medium |
-| General → Anti-Cheat Settings | No save confirmation is displayed. | Add a standard in-app notification. | 🟡 Medium |
-| General → Anti-Cheat Settings | Anti-cheat functionality is not implemented. | Design a future server-side enforcement/integration layer. | 🟡 Medium |
-| General → Other Settings | Uses an inconsistent Windows-style save notification. | Replace with the application's themed notification component. | 🟡 Medium |
-| General → Other Settings | Backend functionality is not implemented. | Define the behavior of individual settings and connect them to server configuration. | 🟡 Medium |
-| All Settings Pages | Unknown persistence architecture. | Audit where every setting is saved, how it is loaded, and how values are restored to the UI. Create a full save/load map. | 🔴 Critical |
-| All Settings Pages | Save feedback is inconsistent. | Standardize all saves using a single themed notification component. | 🟠 High |
+This document tracks known settings-page defects, missing integrations, and persistence work.
+
+## Priority
+
+| Priority | Meaning |
+|---|---|
+| 🔴 Critical | Blocks normal use or risks losing/corrupting settings |
+| 🟠 High | Significant broken behavior or a key required feature |
+| 🟡 Medium | Missing integration or inconsistent behavior |
+
+## Themes
+
+| Issue | Required work | Priority |
+|---|---|---|
+| The Theme Builder locks up after saving an incomplete theme, and fields remain unusable until an application restart. | Investigate form state, validation, controlled components, the save process, and invalid theme objects. Prevent incomplete themes from being saved. | 🔴 Critical |
+| `ThemeBuilder.tsx` contains TypeScript errors. | Resolve all compile and lint errors before continuing theme development. | 🔴 Critical |
+| Uploaded fonts and icons display correctly, but their values do not repopulate the edit fields. | Review theme loading and edit-state population. Restore existing selections in all controls. | 🟠 High |
+| URL-based font and icon themes fail because required fields or tabs are missing. | Compare the UI, theme schema, validation schema, and storage model. Add the missing URL fields. | 🟠 High |
+| "Icon Pack OK" can appear before every URL field has been populated. | Update validation so the success state only appears when all required icon URLs are present. | 🟠 High |
+| Incomplete themes can currently be saved. | Add mandatory-field validation and disable saving until all requirements are satisfied. | 🟠 High |
+| There is no confirmed verification that theme save and load operations round-trip correctly. | Audit storage, retrieval, and UI population. Verify that saved themes can be loaded and displayed unchanged. | 🟠 High |
+
+## Admin and Whitelist
+
+| Issue | Required work | Priority |
+|---|---|---|
+| Added admins disappear after an application restart. | Determine the current storage location and move to reading from and writing to the Rust server admin configuration files. | 🟠 High |
+| The current admin system may not match Rust's server administration model. | Rebuild admin management around the server's actual admin configuration files instead of application-only storage. | 🟡 Medium |
+| The whitelist may duplicate Carbon's existing whitelist functionality. | Decide whether to remove, rebuild, or integrate the whitelist with Carbon's whitelist system. | 🟡 Medium |
+
+## Server Messages
+
+| Issue | Required work | Priority |
+|---|---|---|
+| Added messages disappear after a restart. | Audit the save/load pipeline and persistence location. Confirm that messages are written and reloaded correctly. | 🔴 Critical |
+| Saved messages appear incorrectly in add/edit input fields. | Review form reset logic and data binding. | 🔴 Critical |
+| Future server-message functionality is not implemented. | Design integration with the server framework and chat command system once server control features are available. | 🟡 Medium |
+
+## API and General Settings
+
+| Issue | Required work | Priority |
+|---|---|---|
+| API integration functionality is not implemented. | Define supported API integrations and add a storage/configuration system. | 🟡 Medium |
+| Saving may appear functional, but backend integration is missing. | Verify persistence and later connect settings to moderation or chat enforcement systems. | 🟡 Medium |
+
+### Language Filter
+
+| Issue | Required work | Priority |
+|---|---|---|
+| No save confirmation is displayed. | Use the standard in-app notification component. | 🟡 Medium |
+| Filtering is not implemented. | Plan integration with the moderation system. | 🟡 Medium |
+
+### Anti-Cheat Settings
+
+| Issue | Required work | Priority |
+|---|---|---|
+| No save confirmation is displayed. | Use the standard in-app notification component. | 🟡 Medium |
+| Anti-cheat functionality is not implemented. | Design a future server-side enforcement or integration layer. | 🟡 Medium |
+
+### Other Settings
+
+| Issue | Required work | Priority |
+|---|---|---|
+| The save notification uses inconsistent Windows-style behavior. | Replace it with the application's themed notification component. | 🟡 Medium |
+| Backend functionality is not implemented. | Define the behavior of each setting and connect it to server configuration. | 🟡 Medium |
+
+## All Settings Pages
+
+| Issue | Required work | Priority |
+|---|---|---|
+| The persistence architecture is not consistently documented or understood. | Audit every settings page: identify storage locations, loading behavior, and UI value restoration. Create a complete save/load map. | 🔴 Critical |
+| Save feedback is inconsistent across settings pages. | Standardize save feedback with one themed notification component. | 🟠 High |

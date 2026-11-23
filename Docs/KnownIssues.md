@@ -6,9 +6,9 @@ Settings Persistence Audit
 
 Priority: Critical
 
-Status: Open
+Status: Patially Complete
 
-Description: Determine where every Settings sub-tab stores data, where data is loaded from, and whether values are correctly restored into the UI.
+Description: Relocate save data to another location outside of the applications main folder structure. 
 
 Affected Areas:
 
