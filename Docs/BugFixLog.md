@@ -21,7 +21,7 @@ Outstanding:
 
 Theme Builder Lock-Up
 
-Status: Fixed - full testing required.
+Status: Fixed
 
 Findings:
 
@@ -34,6 +34,12 @@ Findings:
 Resolution:
 
 - Replace alert() dialogs with in-app validation messages and/or notification system.
+
+## B-001a
+
+Theme Builder deletion message
+
+Status: Open
 
 ## B-002
 

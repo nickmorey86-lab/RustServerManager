@@ -110,12 +110,12 @@ export const emptyTheme: ThemeDefinition = {
     dashboard: null,
     servers: null,
     players: null,
-    console: null,
-    settings: null,
     carbon: null,
     oxide: null,
     serverinstaller: null,
-    pluginmanager: null
+    pluginmanager: null,
+    console: null,
+    settings: null
   },
 
   // Sources
@@ -224,12 +224,12 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
     dashboard: "",
     servers: "",
     players: "",
-    console: "",
-    settings: "",
-    carboninstaller: "",
-    oxideinstaller: "",
+    carbon: "",
+    oxide: "",
     serverinstaller: "",
-    pluginmanager: ""
+    pluginmanager: "",
+    console: "",
+    settings: ""
 
   });
   // URL validation state for icon packs
@@ -257,14 +257,14 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
   // ThemeBuilder.tsx (inside component)
   const REQUIRED_ICON_FILES = [
     "dashboard.png",
-    "settings.png",
-    "players.png",
-    "console.png",
     "servers.png",
+    "players.png",
     "carbon.png",
     "oxide.png",
     "serverinstaller.png",
-    "pluginmanager.png"
+    "pluginmanager.png",
+    "console.png",
+    "settings.png"
 
   ];
   // Validation error state
@@ -451,12 +451,12 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
           dashboard: initial.icons?.dashboard ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/dashboard.png` : ""),
           servers: initial.icons?.servers ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/servers.png` : ""),
           players: initial.icons?.players ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/players.png` : ""),
-          console: initial.icons?.console ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/console.png` : ""),
-          settings: initial.icons?.settings ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/settings.png` : ""),
-          carbon: initial.icons?.carbon ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/carboninstaller.png` : ""),
-          oxide: initial.icons?.oxide ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/oxideinstaller.png` : ""),
+          carbon: initial.icons?.carbon ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/carbon.png` : ""),
+          oxide: initial.icons?.oxide ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/oxide.png` : ""),
           serverinstaller: initial.icons?.serverinstaller ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/serverinstaller.png` : ""),
-          pluginmanager: initial.icons?.pluginmanager ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/pluginmanager.png` : "")
+          pluginmanager: initial.icons?.pluginmanager ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/pluginmanager.png` : ""),
+          console: initial.icons?.console ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/console.png` : ""),
+          settings: initial.icons?.settings ?? (iconMeta.urlBase ? `${iconMeta.urlBase}/settings.png` : "")
 
         });
       }
@@ -804,12 +804,12 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                           dashboard: `/icons/${pack}/dashboard.png`,
                           servers: `/icons/${pack}/servers.png`,
                           players: `/icons/${pack}/players.png`,
-                          console: `/icons/${pack}/console.png`,
-                          settings: `/icons/${pack}/settings.png`,
                           carbon: `/icons/${pack}/carbon.png`,
                           oxide: `/icons/${pack}/oxide.png`,
                           serverinstaller: `/icons/${pack}/serverinstaller.png`,
-                          pluginmanager: `/icons/${pack}/pluginmanager.png`
+                          pluginmanager: `/icons/${pack}/pluginmanager.png`,
+                          console: `/icons/${pack}/console.png`,
+                          settings: `/icons/${pack}/settings.png`
                         };
 
                         setTheme(prev => ({
@@ -845,7 +845,7 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                     </label>
 
                     <label>
-                      Servers Icon URL
+                      Server Info Icon URL
                       <input
                         type="text"
                         placeholder="https://example.com/icons/servers.png"
@@ -860,7 +860,7 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                     </label>
 
                     <label>
-                      Players Icon URL
+                      Player Admin Icon URL
                       <input
                         type="text"
                         placeholder="https://example.com/icons/players.png"
@@ -869,6 +869,66 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                           const v = e.target.value.trim();
                           setIconUrls(prev => ({ ...prev, players: v }));
                           setTheme(prev => ({ ...prev, icons: { ...prev.icons, players: v } }));
+                          setIconUrlValid(null);
+                        }}
+                      />
+                    </label>
+
+                    <label>
+                      Carbon Installer Icon URL
+                      <input
+                        type="text"
+                        placeholder="https://example.com/icons/carbon.png"
+                        value={iconUrls.carbon}
+                        onChange={e => {
+                          const v = e.target.value.trim();
+                          setIconUrls(prev => ({ ...prev, carbon: v }));
+                          setTheme(prev => ({ ...prev, icons: { ...prev.icons, carbon: v } }));
+                          setIconUrlValid(null);
+                        }}
+                      />
+                    </label>
+
+                    <label>
+                      Oxide/Umod Installer Icon URL
+                      <input
+                        type="text"
+                        placeholder="https://example.com/icons/oxide.png"
+                        value={iconUrls.oxide}
+                        onChange={e => {
+                          const v = e.target.value.trim();
+                          setIconUrls(prev => ({ ...prev, oxide: v }));
+                          setTheme(prev => ({ ...prev, icons: { ...prev.icons, oxide: v } }));
+                          setIconUrlValid(null);
+                        }}
+                      />
+                    </label>
+
+                    <label>
+                      Server Installer Icon URL
+                      <input
+                        type="text"
+                        placeholder="https://example.com/icons/serverinstaller.png"
+                        value={iconUrls.serverinstaller}
+                        onChange={e => {
+                          const v = e.target.value.trim();
+                          setIconUrls(prev => ({ ...prev, serverinstaller: v }));
+                          setTheme(prev => ({ ...prev, icons: { ...prev.icons, serverinstaller: v } }));
+                          setIconUrlValid(null);
+                        }}
+                      />
+                    </label>
+
+                    <label>
+                      Plugin Manager Icon URL
+                      <input
+                        type="text"
+                        placeholder="https://example.com/icons/pluginmanager.png"
+                        value={iconUrls.pluginmanager}
+                        onChange={e => {
+                          const v = e.target.value.trim();
+                          setIconUrls(prev => ({ ...prev, pluginmanager: v }));
+                          setTheme(prev => ({ ...prev, icons: { ...prev.icons, pluginmanager: v } }));
                           setIconUrlValid(null);
                         }}
                       />
@@ -1286,8 +1346,10 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                 if (iconSource === "builtin") return !!iconPack && iconPack !== "select";
                 if (iconSource === "upload") return iconFiles.length > 0;
                 if (iconSource === "url") {
-                  const anyPerIcon = Object.values(iconUrls || {}).some(v => !!(v && v.trim()));
-                  return anyPerIcon ? true : !!(iconUrlBase && iconUrlBase.trim());
+                  const allPerIcon = Object.values(iconUrls || {}).every(
+                    v => !!(v && v.trim())
+                  );
+                  return allPerIcon || !!(iconUrlBase && iconUrlBase.trim());
                 }
                 return !!theme.icons;
               })();
@@ -1309,16 +1371,6 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
               })();
               if (!bodyFontIsSelected) missing.push("Body font (select/upload/provide URL)");
 
-
-              /* if (missing.length > 0) {
-                 alert(`Cannot save theme. Missing required fields:\n- ${missing.join("\n- ")}`);
-                 return;
-               }*/
-
-              /*if (missing.length > 0) {
-               console.log("Missing fields:", missing);
-               return;
-               }*/
               if (missing.length > 0) {
                 setValidationError(
                   `Missing required fields: ${missing.join(", ")}`
@@ -1374,31 +1426,31 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                 dashboard: "",
                 servers: "",
                 players: "",
-                console: "",
-                settings: "",
                 carbon: "",
                 oxide: "",
                 serverinstaller: "",
-                pluginmanager: ""
+                pluginmanager: "",
+                console: "",
+                settings: ""
               };
 
               if (iconSource === "builtin") {
                 finalIcons.dashboard = `/icons/${iconPack}/dashboard.png`;
                 finalIcons.servers = `/icons/${iconPack}/servers.png`;
                 finalIcons.players = `/icons/${iconPack}/players.png`;
-                finalIcons.console = `/icons/${iconPack}/console.png`;
-                finalIcons.settings = `/icons/${iconPack}/settings.png`;
                 finalIcons.carbon = `/icons/${iconPack}/carbon.png`;
                 finalIcons.oxide = `/icons/${iconPack}/oxide.png`;
                 finalIcons.serverinstaller = `/icons/${iconPack}/serverinstaller.png`;
                 finalIcons.pluginmanager = `/icons/${iconPack}/pluginmanager.png`;
+                finalIcons.console = `/icons/${iconPack}/console.png`;
+                finalIcons.settings = `/icons/${iconPack}/settings.png`;
                 finalUploadedIconNames = null;
               }
               else if (iconSource === "upload" && iconFiles.length > 0) {
                 const fileMap = new Map<string, File>();
                 iconFiles.forEach(f => fileMap.set(f.name, f));
 
-                const required = ["dashboard.png", "settings.png", "players.png", "console.png", "servers.png"];
+                const required = ["dashboard.png", "servers.png", "players.png", "carbon.png", "oxide.png", "serverinstaller.png", "pluginmanager.png", "console.png", "settings.png"];
 
                 for (const name of required) {
                   if (!fileMap.has(name)) {
@@ -1423,12 +1475,12 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                 finalIcons.dashboard = savedIcons.dashboard;
                 finalIcons.servers = savedIcons.servers;
                 finalIcons.players = savedIcons.players;
-                finalIcons.console = savedIcons.console;
-                finalIcons.settings = savedIcons.settings;
                 finalIcons.carbon = savedIcons.carbon;
                 finalIcons.oxide = savedIcons.oxide;
                 finalIcons.serverinstaller = savedIcons.serverinstaller;
                 finalIcons.pluginmanager = savedIcons.pluginmanager;
+                finalIcons.console = savedIcons.console;
+                finalIcons.settings = savedIcons.settings;
 
                 finalUploadedIconNames = required;
               }
@@ -1438,23 +1490,23 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                   finalIcons.dashboard = iconUrls.dashboard || null;
                   finalIcons.servers = iconUrls.servers || null;
                   finalIcons.players = iconUrls.players || null;
-                  finalIcons.console = iconUrls.console || null;
-                  finalIcons.settings = iconUrls.settings || null;
                   finalIcons.carbon = iconUrls.carbon || null;
                   finalIcons.oxide = iconUrls.oxide || null;
                   finalIcons.serverinstaller = iconUrls.serverinstaller || null;
                   finalIcons.pluginmanager = iconUrls.pluginmanager || null;
+                  finalIcons.console = iconUrls.console || null;
+                  finalIcons.settings = iconUrls.settings || null;
                 } else if (iconUrlBase && iconUrlBase.trim()) {
                   const base = iconUrlBase.trim().replace(/\/+$/g, "");
                   finalIcons.dashboard = `${base}/dashboard.png`;
                   finalIcons.servers = `${base}/servers.png`;
                   finalIcons.players = `${base}/players.png`;
-                  finalIcons.console = `${base}/console.png`;
-                  finalIcons.settings = `${base}/settings.png`;
                   finalIcons.carbon = `${base}/carbon.png`;
                   finalIcons.oxide = `${base}/oxide.png`;
                   finalIcons.serverinstaller = `${base}/serverinstaller.png`;
                   finalIcons.pluginmanager = `${base}/pluginmanager.png`;
+                  finalIcons.console = `${base}/console.png`;
+                  finalIcons.settings = `${base}/settings.png`;
                 }
                 finalUploadedIconNames = null;
               }
@@ -1462,12 +1514,12 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                 finalIcons.dashboard = theme.icons.dashboard;
                 finalIcons.servers = theme.icons.servers;
                 finalIcons.players = theme.icons.players;
-                finalIcons.console = theme.icons.console;
-                finalIcons.settings = theme.icons.settings;
                 finalIcons.carbon = theme.icons.carbon;
                 finalIcons.oxide = theme.icons.oxide;
                 finalIcons.serverinstaller = theme.icons.serverinstaller;
                 finalIcons.pluginmanager = theme.icons.pluginmanager;
+                finalIcons.console = theme.icons.console;
+                finalIcons.settings = theme.icons.settings;
               }
 
               // ---------------- FONTS (Fix #2 + Fix #3) ----------------

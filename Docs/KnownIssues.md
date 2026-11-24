@@ -28,11 +28,24 @@ Theme Builder Lock-Up
 
 Priority: Critical
 
-Status: Fix implemented - full testing required
+Status: Fixed
 
 Saving an incomplete theme causes input controls to become unusable until application restart or clicking away from application.
 
 ---
+
+## B-001a
+
+Theme Builder deletion message
+
+Priority: Low
+
+Status: Open
+
+When deleting a theme a windows style popup is displayed and it should me more theme related.
+
+---
+
 
 ## B-002
 

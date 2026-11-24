@@ -1,8 +1,8 @@
 # Changelog
 
-## 2026-11-20
-
 ---
+
+## 2026-11-20
 
 ### Added
 
@@ -14,15 +14,13 @@
 - Known issues tracker added
 - Sprint board added
 
----
-
 ## CHG20261120-Notes
 
 - This marks the first documented project baseline.
 
-## 2026-11-23
-
 ---
+
+## 2026-11-23
 
 ### removed
 
@@ -33,8 +31,23 @@
 - frontend__tmp_notice.txt
 - fileManager.ts.deleting-note.txt
 
----
-
 ## GHG20261123-Notes
 
 - These files created serve no purpose, SeverBackend left untouched for now as cannot determin when it was created and why, currently does not connect to anything.
+
+---
+
+## 2026-11-24
+
+### Updated
+
+- resolution for app locking up on bad save
+- updated themeBuilder warnings for icons
+- updated themeBuilder warning for bad save
+
+## CHG20261124-Notes
+
+- themeBuilder working better, some other errors to work through
+- identified theme deletion warning is windows popup and needs a modal creating
+- Identified that errors/warnings need unifying across the application, requires peer review across settings pages.
+- bug B-001 resolved, B-001a created.
