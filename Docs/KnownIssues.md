@@ -28,9 +28,9 @@ Theme Builder Lock-Up
 
 Priority: Critical
 
-Status: Open
+Status: Fix implemented - full testing required
 
-Saving an incomplete theme causes input controls to become unusable until application restart.
+Saving an incomplete theme causes input controls to become unusable until application restart or clicking away from application.
 
 ---
 

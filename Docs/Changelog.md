@@ -5,6 +5,7 @@
 ---
 
 ### Added
+
 - Git repository created
 - GitHub repository created
 - Project uploaded to GitHub
@@ -15,9 +16,9 @@
 
 ---
 
-# Notes
- - This marks the first documented project baseline.
+## CHG20261120-Notes
 
+- This marks the first documented project baseline.
 
 ## 2026-11-23
 
@@ -34,5 +35,6 @@
 
 ---
 
-# Notes
+## GHG20261123-Notes
+
 - These files created serve no purpose, SeverBackend left untouched for now as cannot determin when it was created and why, currently does not connect to anything.

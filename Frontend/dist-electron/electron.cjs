@@ -741,4 +741,3 @@ import_electron.app.on("window-all-closed", () => {
 0 && (module.exports = {
   resolveThemeUrl
 });
-//# sourceMappingURL=electron.cjs.map

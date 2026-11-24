@@ -41,4 +41,3 @@ import_electron.contextBridge.exposeInMainWorld("ChatMessages", {
   load: () => import_electron.ipcRenderer.invoke("ChatMessages:load"),
   save: (settings) => import_electron.ipcRenderer.invoke("ChatMessages:save", settings)
 });
-//# sourceMappingURL=preload.cjs.map

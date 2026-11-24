@@ -267,6 +267,8 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
     "pluginmanager.png"
 
   ];
+  // Validation error state
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   function handleIconFolderUpload(e: React.ChangeEvent<HTMLInputElement>) {
     const files = Array.from(e.target.files || []);
@@ -282,10 +284,10 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
     );
 
     if (missing.length > 0) {
-      alert(
-        `The selected folder is missing required icons:\n\n${missing.join(
+      setValidationError(
+        `The selected folder is missing required icons: ${missing.join(
           ", "
-        )}\n\nExpected files: ${REQUIRED_ICON_FILES.join(", ")}`
+        )}`
       );
       e.currentTarget.value = "";
       setIconFiles([]);
@@ -300,10 +302,10 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
     );
 
     if (invalid.length > 0) {
-      alert(
-        `Some files are not valid images or are too large:\n\n${invalid
+      setValidationError(
+        `Invalid or oversized files: ${invalid
           .map(f => `${f.name} (${Math.round(f.size / 1024)}KB)`)
-          .join("\n")}`
+          .join(", ")}`
       );
       e.currentTarget.value = "";
       setIconFiles([]);
@@ -352,6 +354,7 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
     (async () => {
       const missing: string[] = [];
 
+
       if (hasPerIcon) {
         // Validate each provided URL
         await Promise.all(keys.map(async (k) => {
@@ -364,8 +367,8 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
             const res = await fetch(url, { method: "HEAD" });
             if (!res.ok) missing.push(k);
           } catch {
-                  missing.push(k);
-}
+            missing.push(k);
+          }
         }));
       } else if (iconUrlBase && iconUrlBase.trim()) {
         const base = iconUrlBase.trim().replace(/\/+$/g, "") + "/";
@@ -612,11 +615,17 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                 <input
                   type="text"
                   value={theme.name}
-                  onChange={e =>
-                    setTheme(prev => ({ ...prev, name: e.target.value }))
-                  }
+                  onChange={e => {
+                    setValidationError(null);
+
+                    setTheme(prev => ({
+                      ...prev,
+                      name: e.target.value
+                    }));
+                  }}
                   placeholder="Enter a theme name"
                 />
+
               </label>
 
 
@@ -1244,12 +1253,24 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
           </div>
         </div>
 
+        {validationError && (
+          <div className="theme-validation-error">
+            {validationError}
+          </div>
+        )}
+
+
         {/* Footer */}
         <div className="theme-builder-footer">
           <button
             onClick={async () => {
               // Validate required theme fields before saving
+              setValidationError(null);
               const missing: string[] = [];
+
+              if (!theme.name.trim()) {
+                missing.push("Theme name");
+              }
 
               // Logo / Icons / Fonts must not be in the "blank select" state
               const logoIsSelected = (() => {
@@ -1289,11 +1310,21 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
               if (!bodyFontIsSelected) missing.push("Body font (select/upload/provide URL)");
 
 
+              /* if (missing.length > 0) {
+                 alert(`Cannot save theme. Missing required fields:\n- ${missing.join("\n- ")}`);
+                 return;
+               }*/
+
+              /*if (missing.length > 0) {
+               console.log("Missing fields:", missing);
+               return;
+               }*/
               if (missing.length > 0) {
-                alert(`Cannot save theme. Missing required fields:\n- ${missing.join("\n- ")}`);
+                setValidationError(
+                  `Missing required fields: ${missing.join(", ")}`
+                );
                 return;
               }
-
 
               // ---------------- THEME ID (Fix #1) ----------------
               let themeId: string;
@@ -1371,7 +1402,9 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
 
                 for (const name of required) {
                   if (!fileMap.has(name)) {
-                    alert(`Missing required icon: ${name}`);
+                    setValidationError(
+                      `Missing required icon: ${name}`
+                    );
                     return;
                   }
                 }
@@ -1529,6 +1562,8 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
               await window.themeAPI.save(finalTheme);
               onSave(finalTheme);
             }}
+
+
 
             className="primary-btn"
           >

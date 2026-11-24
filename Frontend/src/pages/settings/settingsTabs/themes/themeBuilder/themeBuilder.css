@@ -498,3 +498,12 @@
     font-size: 13px;
     margin-top: 4px;
 }
+.theme-validation-error {
+  margin: 12px 24px;
+  padding: 12px;
+  border-radius: 6px;
+  background: rgba(220, 38, 38, 0.15);
+  border: 1px solid #dc2626;
+  color: #ffb4b4;
+  font-size: 14px;
+}
