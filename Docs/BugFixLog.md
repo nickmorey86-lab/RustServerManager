@@ -43,3 +43,4 @@ Resolution:
 
 - Status: Investigating
 - Findings: ChatMessages persistence architecture confirmed. Need to inspect JSON contents after save.
+  

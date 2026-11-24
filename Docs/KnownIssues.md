@@ -8,7 +8,7 @@ Priority: Critical
 
 Status: Patially Complete
 
-Description: Relocate save data to another location outside of the applications main folder structure. 
+Description: Relocate save data to another location outside of the applications main folder structure.
 
 Affected Areas:
 
