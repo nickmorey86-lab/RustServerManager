@@ -43,10 +43,21 @@ Status: Open
 
 ## B-002
 
-- Status: Open
+Status: Mostly fixed
+
+- issue on setIconValid: Calling setState synchronously error.
+
+## B-003
+
+Status: Fixed
+
+- missing icon fields added.
 
 ## B-005
 
-- Status: Investigating
-- Findings: ChatMessages persistence architecture confirmed. Need to inspect JSON contents after save.
+Status: Investigating
+
+Findings:
+
+- ChatMessages persistence architecture confirmed. Need to inspect JSON contents after save.
   

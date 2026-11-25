@@ -8,7 +8,7 @@ Priority: Critical
 
 Status: Patially Complete
 
-Description: Relocate save data to another location outside of the applications main folder structure.
+Description: Relocate save data to another location outside of the applications main folder structure. add in backup and restore options.
 
 Affected Areas:
 
@@ -46,16 +46,17 @@ When deleting a theme a windows style popup is displayed and it should me more t
 
 ---
 
-
 ## B-002
 
 ThemeBuilder.tsx Errors
 
-Priority: Critical
+Priority: Low
 
-Status: Open
+Status: mostly fixed
 
 TypeScript errors exist in ThemeBuilder.tsx and require investigation.
+
+Single error remaining, low priority issue when Calling setState synchronously
 
 ---
 
@@ -65,7 +66,7 @@ Theme URL Support
 
 Priority: High
 
-Status: Open
+Status: Fixed
 
 URL-based themes have missing icon fields and incomplete validation.
 
@@ -79,7 +80,8 @@ Priority: High
 
 Status: Open
 
-Selected uploaded fonts and icons are not restored into edit controls when editing a theme.
+Uploaded font and icon selections are not cleared when changing source type
+(Built-in, Upload, URL), allowing stale values to remain in component state.
 
 ---
 

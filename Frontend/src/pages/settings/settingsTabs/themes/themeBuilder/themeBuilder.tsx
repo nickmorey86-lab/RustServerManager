@@ -8,19 +8,35 @@ import type { ThemeDefinition } from "../themeTypes";
 import "./themeBuilder.css";
 import { safeHex } from "../../../../../utils/safeHex";
 import { Buffer } from "buffer";
+import {
+  emptyTheme,
+  AssetSource,
+  slugify,
+  deriveLogoSource,
+  deriveIconSource,
+  deriveFontSource
+} from "./themeBuilderHelper";
+
+type DirectoryInputProps = {
+  webkitdirectory?: string;
+  directory?: string;
+};
+
+type IconKey = keyof ThemeIcons;
+type ThemeIcons = ThemeDefinition["icons"];
 
 /* -------------------------------------------------------
    HELPERS
 ------------------------------------------------------- */
 
 // Local slugify for renderer (used to generate theme ids)
-function slugify(name: string) {
+/*function slugify(name: string) {
   return name
     .toLowerCase()
     .trim()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-+|-+$/g, "");
-}
+}*/
 
 // Helper: guess font format from filename
 /* function guessFormat(url: string) {
@@ -58,7 +74,7 @@ function slugify(name: string) {
    DEFAULT EMPTY THEME
 ------------------------------------------------------- */
 
-export const emptyTheme: ThemeDefinition = {
+/*export const emptyTheme: ThemeDefinition = {
   id: "",  // id assigned when theme is saved
   name: "",
   isDefault: false,
@@ -137,14 +153,14 @@ export const emptyTheme: ThemeDefinition = {
 
   // Built‑in icon pack name
   iconPack: null
-};
+};*/
 
 
 /* -------------------------------------------------------
    TYPED DERIVE HELPERS
 ------------------------------------------------------- */
 
-type AssetSource = "builtin" | "upload" | "url";
+/*type AssetSource = "builtin" | "upload" | "url";
 
 function deriveLogoSource(logo: string | null): AssetSource {
   if (!logo) return "builtin";
@@ -189,7 +205,8 @@ function deriveFontSource(font: string | null): {
     return { source: "url", value: font, url: font };
   }
   return { source: "url", value: font, url: font };
-}
+}*/
+
 /* -------------------------------------------------------
    PROPS
 ------------------------------------------------------- */
@@ -220,18 +237,19 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
   const [iconPack, setIconPack] = useState<string>("");
   const [iconFiles, setIconFiles] = useState<File[]>([]);
   const [iconUrlBase, setIconUrlBase] = useState<string>("");
-  const [iconUrls, setIconUrls] = useState<Record<string, string>>({
-    dashboard: "",
-    servers: "",
-    players: "",
-    carbon: "",
-    oxide: "",
-    serverinstaller: "",
-    pluginmanager: "",
-    console: "",
-    settings: ""
+  const [iconUrls, setIconUrls] =
+    useState<Record<IconKey, string>>({
+      dashboard: "",
+      servers: "",
+      players: "",
+      carbon: "",
+      oxide: "",
+      serverinstaller: "",
+      pluginmanager: "",
+      console: "",
+      settings: ""
 
-  });
+    });
   // URL validation state for icon packs
   const [iconUrlValid, setIconUrlValid] = useState<boolean | null>(null);
   const [iconUrlMissing, setIconUrlMissing] = useState<string[]>([]);
@@ -347,8 +365,17 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
     }
 
     let cancelled = false;
-    const keys = ["dashboard", "servers", "players", "console", "settings", "carbon", "oxide", "serverinstaller", "pluginmanager"];
-
+    const keys: IconKey[] = [
+      "dashboard",
+      "servers",
+      "players",
+      "console",
+      "settings",
+      "carbon",
+      "oxide",
+      "serverinstaller",
+      "pluginmanager"
+    ];
     const hasPerIcon = Object.values(iconUrls || {}).some(v => !!(v && v.trim()));
 
     (async () => {
@@ -358,7 +385,7 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
       if (hasPerIcon) {
         // Validate each provided URL
         await Promise.all(keys.map(async (k) => {
-          const url = (iconUrls as any)[k] || "";
+          const url = (iconUrls)[k] || "";
           if (!url) {
             missing.push(k);
             return;
@@ -377,7 +404,7 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
           try {
             const res = await fetch(base + name, { method: "HEAD" });
             if (!res.ok) missing.push(name);
-          } catch (e) {
+          } catch {
             missing.push(name);
           }
         }));
@@ -746,7 +773,10 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                         type="file"
                         multiple
                         onChange={handleIconFolderUpload}
-                        {...({ webkitdirectory: "true", directory: "true" } as any)}
+                        {...({
+                          webkitdirectory: "true",
+                          directory: "true"
+                        } as DirectoryInputProps)}
                       />
 
                       <div className="theme-icon-upload-hint">
@@ -1066,7 +1096,7 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                   {titleFontSource === "url" && (
                     <div className="theme-font-info">
                       <ul>
-                        <li><h3>To use Google API fonts: https://fonts.google.com/ </h3></li>
+                        <li>To use Google API fonts: https://fonts.google.com/</li>
                         <li>Select all the fonts you want to use and click get embed code</li>
                         <li>Copy the URL from the href in the link tag, it should look like: https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap</li>
                         <li>Paste the URL into the address bar of your browser</li>
@@ -1167,7 +1197,7 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
               {bodyFontSource === "url" && (
                 <div className="theme-font-info">
                   <ul>
-                    <li><h3>To use Google API fonts: https://fonts.google.com/ </h3></li>
+                    <li>To use Google API fonts: https://fonts.google.com/ </li>
                     <li>Select all the fonts you want to use and click get embed code</li>
                     <li>Copy the URL from the href in the link tag, it should look like: https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap</li>
                     <li>Paste the URL into the address bar of your browser</li>
@@ -1422,7 +1452,7 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
               }
 
               // ---------------- ICONS ----------------
-              const finalIcons: any = {
+              const finalIcons: ThemeIcons = {
                 dashboard: "",
                 servers: "",
                 players: "",
@@ -1461,14 +1491,25 @@ export function ThemeBuilder({ initial, onSave, onClose }: ThemeBuilderProps) {
                   }
                 }
 
-                const savedIcons: any = {};
+                const savedIcons: ThemeIcons = {
+                  dashboard: "",
+                  servers: "",
+                  players: "",
+                  carbon: "",
+                  oxide: "",
+                  serverinstaller: "",
+                  pluginmanager: "",
+                  console: "",
+                  settings: ""
+                };
+                /*const savedIcons: Partial<ThemeDefinition["icons"]> = {};*/
                 for (const name of required) {
                   const file = fileMap.get(name)!;
                   const safeName = file.name.toLowerCase().replace(/[^a-z0-9.-]/g, "-");
                   const arrayBuffer = await file.arrayBuffer();
                   const buffer = Buffer.from(arrayBuffer);
                   const savedPath = await window.themeAPI.saveIcon(themeId, safeName, buffer);
-                  const key = name.replace(".png", "").toLowerCase();
+                  const key = name.replace(".png", "").toLowerCase() as IconKey;
                   savedIcons[key] = savedPath;
                 }
 
