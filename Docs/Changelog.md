@@ -39,7 +39,7 @@
 
 ## 2026-11-24
 
-### Updated
+### Updated themebuilder
 
 - resolution for app locking up on bad save
 - updated themeBuilder warnings for icons
@@ -51,3 +51,21 @@
 - identified theme deletion warning is windows popup and needs a modal creating
 - Identified that errors/warnings need unifying across the application, requires peer review across settings pages.
 - bug B-001 resolved, B-001a created.
+
+---
+
+## 2026-11-26
+
+### Updated server messages
+
+- resolved main issue with server messages not saving all messages properly
+- resolved minor theming issue
+- added better delete button to server messages
+- themeBuilder also clear of errors apart from setIconUrlValid
+  
+## CHG20261126-Notes
+
+- still some windows popups showing
+- final error showing in themeContex needs resolving
+- still needs design principles peer review
+  

@@ -42,8 +42,8 @@ var consolidatedDataRoot = import_path.default.join(import_electron.app.getAppPa
 var userThemesDir = import_path.default.join(consolidatedDataRoot, "themes");
 var userApiServicesDirBase = import_path.default.join(consolidatedDataRoot, "apiServices");
 var userApiServicesPath = import_path.default.join(userApiServicesDirBase, "apiServices.json");
-var userChatMessagesDir = import_path.default.join(consolidatedDataRoot, "serverMessages");
-var userChatMessagesPath = import_path.default.join(userChatMessagesDir, "ChatMessages.json");
+var userserverMessagesDir = import_path.default.join(consolidatedDataRoot, "serverMessages");
+var userserverMessagesPath = import_path.default.join(userserverMessagesDir, "serverMessages.json");
 var userCombinedAdminWhitelistDir = import_path.default.join(consolidatedDataRoot, "adminWhitelist");
 var userCombinedAdminWhitelistPath = import_path.default.join(userCombinedAdminWhitelistDir, "AdminWhitelist.json");
 var userRulesDir = import_path.default.join(consolidatedDataRoot, "rules");
@@ -59,7 +59,7 @@ if (!import_fs.default.existsSync(consolidatedDataRoot)) {
 for (const dir of [
   userThemesDir,
   userApiServicesDirBase,
-  userChatMessagesDir,
+  userserverMessagesDir,
   userCombinedAdminWhitelistDir,
   userRulesDir,
   userLanguageFilterDir,
@@ -670,40 +670,51 @@ import_electron.ipcMain.handle("CombinedAdminWhitelist:save", async (_event, set
     return { success: false, error: String(err) };
   }
 });
-import_electron.ipcMain.handle("ChatMessages:load", () => {
+import_electron.ipcMain.handle("serverMessages:load", () => {
   try {
-    if (!import_fs.default.existsSync(userChatMessagesPath)) return null;
-    const raw = import_fs.default.readFileSync(userChatMessagesPath, "utf8");
+    if (!import_fs.default.existsSync(userserverMessagesPath)) {
+      return [];
+    }
+    const raw = import_fs.default.readFileSync(
+      userserverMessagesPath,
+      "utf8"
+    );
     const parsed = JSON.parse(raw);
-    return {
-      id: typeof parsed.id === "string" ? parsed.id : "",
-      enable: !!parsed.enable,
-      sayWhat: typeof parsed.sayWhat === "string" ? parsed.sayWhat : "",
-      everyMins: typeof parsed.everyMins === "number" ? parsed.everyMins : 0
-    };
+    const messages = Array.isArray(parsed) ? parsed : [parsed];
+    return messages.map((message) => ({
+      id: typeof message.id === "string" ? message.id : import_crypto.default.randomUUID(),
+      enable: !!message.enable,
+      sayWhat: typeof message.sayWhat === "string" ? message.sayWhat : "",
+      everyMins: typeof message.everyMins === "number" ? message.everyMins : 0
+    }));
   } catch (err) {
-    console.error("Failed to load ChatMessages settings:", err);
-    return null;
+    console.error(
+      "Failed to load serverMessages settings:",
+      err
+    );
+    return [];
   }
 });
-import_electron.ipcMain.handle("ChatMessages:save", async (_event, settings) => {
+import_electron.ipcMain.handle("serverMessages:save", async (_event, settings) => {
   try {
     const errors = [];
-    if (settings.enable && (!settings.sayWhat || settings.sayWhat <= "")) errors.push("Please enter your message.");
-    if (settings.enable && (!settings.everyMins || settings.everyMins <= 0)) errors.push("Please enter the frequency of the message.");
+    for (const setting of settings) {
+      if (setting.enable && (!setting.sayWhat || setting.sayWhat.trim() === "")) errors.push("Please enter your message.");
+      if (setting.enable && (!setting.everyMins || setting.everyMins <= 0)) errors.push("Please enter the frequency of the message.");
+    }
     if (errors.length) {
       return { success: false, error: "Missing values found:\n" + errors.join("\n") };
     }
-    const safe = {
-      id: typeof settings.id === "string" ? settings.id : "",
-      enable: !!settings.enable,
-      sayWhat: typeof settings.sayWhat === "string" ? settings.sayWhat : "",
-      everyMins: typeof settings.everyMins === "number" ? settings.everyMins : 0
-    };
-    import_fs.default.writeFileSync(userChatMessagesPath, JSON.stringify(safe, null, 2), "utf8");
+    const safe = settings.map((message) => ({
+      id: typeof message.id === "string" ? message.id : import_crypto.default.randomUUID(),
+      enable: !!message.enable,
+      sayWhat: typeof message.sayWhat === "string" ? message.sayWhat : "",
+      everyMins: typeof message.everyMins === "number" ? message.everyMins : 0
+    }));
+    import_fs.default.writeFileSync(userserverMessagesPath, JSON.stringify(safe, null, 2), "utf8");
     return { success: true };
   } catch (err) {
-    console.error("Failed to save ChatMessages settings:", err);
+    console.error("Failed to save serverMessages settings:", err);
     return { success: false, error: String(err) };
   }
 });

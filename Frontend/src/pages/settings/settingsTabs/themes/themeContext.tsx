@@ -61,7 +61,6 @@ function guessFontFormat(url: string) {
    ------------------------- */
 
 function applyThemeToDocument(theme: ThemeDefinition) {
-  const root = document.documentElement;
 
   // -----------------------------
   // Colors + background + aliases
@@ -93,15 +92,19 @@ function applyThemeToDocument(theme: ThemeDefinition) {
     safeSetCssVar("--panel-shadow", colors.panelShadow ?? "");
 
     // Primary / secondary backgrounds
+    safeSetCssVar("--primaryBg", colors.primaryBg ?? "");
+    safeSetCssVar("--primaryText", colors.primaryText ?? "");
     safeSetCssVar("--card-primary-bg", colors.primaryBg ?? "");
     safeSetCssVar("--card-primary-text", colors.primaryText ?? "");
     safeSetCssVar("--secondary-bg", colors.secondaryBg ?? "");
     safeSetCssVar("--secondary-text", colors.secondaryText ?? "");
 
+
     // Danger / status / accent
     safeSetCssVar("--card-dangerBg", colors.dangerBg ?? "");
     safeSetCssVar("--card-dangerText", colors.dangerText ?? "");
     // compatibility alias used in some CSS files
+    safeSetCssVar("--dangerBg", colors.dangerBg ?? "");
     safeSetCssVar("--dangerText", colors.dangerText ?? "");
     safeSetCssVar("--status-online", colors.statusOnline ?? "");
     safeSetCssVar("--status-offline", colors.statusOffline ?? "");
@@ -153,6 +156,8 @@ function applyThemeToDocument(theme: ThemeDefinition) {
       safeSetCssVar("--accentColor", colors.accent ?? "");
       safeSetCssVar("--statusOnline", colors.statusOnline ?? "");
       safeSetCssVar("--statusOffline", colors.statusOffline ?? "");
+      safeSetCssVar("--dangerBg", colors.dangerBg ?? "");
+      safeSetCssVar("--dangerText", colors.dangerText ?? "");
 
       // Header / top nav aliases (common names)
       safeSetCssVar("--topNavBg", colors.panelBg ?? colors.sidebarBg ?? "");
@@ -195,7 +200,9 @@ function applyThemeToDocument(theme: ThemeDefinition) {
             if (maybeStart) safeSetCssVar("--gradient-start", maybeStart);
             if (maybeEnd) safeSetCssVar("--gradient-end", maybeEnd);
           }
-        } catch { }
+        } catch {
+          // Ignore
+        }
       } else {
         const fallback = theme.solidBackground ?? (bgFromColors && !bgFromColors.includes("gradient") ? bgFromColors : "");
         safeSetCssVar("--theme-background", fallback);
@@ -284,7 +291,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
               const maybe = window.themeAPI.loadThemeId() as unknown;
 
-              if (maybe && typeof (maybe as any).then === "function") {
+              if (
+                maybe &&
+                typeof (maybe as { then?: unknown }).then === "function"
+              ) {
                 return await (maybe as unknown as Promise<string>);
               }
 
@@ -342,7 +352,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
         const src = `url(${urlOrThemeUrl}) format("${fmt}")`;
         const face = new FontFace(family, src, { style: "normal", weight: "400" });
         const loaded = await face.load();
-        (document as any).fonts.add(loaded);
+        document.fonts.add(loaded);
         loadedFaces.push(loaded);
       } catch (e) {
         console.warn(`Failed to load font ${familySuffix} for theme ${activeTheme.id} from ${urlOrThemeUrl}:`, e);

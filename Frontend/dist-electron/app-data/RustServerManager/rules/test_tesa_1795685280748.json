@@ -1,0 +1,11 @@
+{
+  "ruleName": "test tesa",
+  "enabled": true,
+  "AmountLastMins": "5",
+  "ViolationRateExceeds": "5",
+  "SameMessageMoreThan": "5",
+  "MaxViolationsBeforeAction": "5",
+  "Action": "Warn",
+  "Message": "test",
+  "fileName": "test_1795684874005.json"
+}

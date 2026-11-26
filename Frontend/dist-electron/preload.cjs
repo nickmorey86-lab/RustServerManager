@@ -37,7 +37,7 @@ import_electron.contextBridge.exposeInMainWorld("CombinedAdminWhitelist", {
   load: () => import_electron.ipcRenderer.invoke("CombinedAdminWhitelist:load"),
   save: (settings) => import_electron.ipcRenderer.invoke("CombinedAdminWhitelist:save", settings)
 });
-import_electron.contextBridge.exposeInMainWorld("ChatMessages", {
-  load: () => import_electron.ipcRenderer.invoke("ChatMessages:load"),
-  save: (settings) => import_electron.ipcRenderer.invoke("ChatMessages:save", settings)
+import_electron.contextBridge.exposeInMainWorld("serverMessages", {
+  load: () => import_electron.ipcRenderer.invoke("serverMessages:load"),
+  save: (settings) => import_electron.ipcRenderer.invoke("serverMessages:save", settings)
 });

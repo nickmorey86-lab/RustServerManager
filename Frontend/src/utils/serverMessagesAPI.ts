@@ -1,45 +1,43 @@
-type serverMessagesAPI = {
-    ChatMessages: {
-        load: () => Promise<ChatMessages | null>;
-        save: (settings: ChatMessages) => Promise<{ success: boolean; error?: string }>;
+type ServerMessagesAPI = {
+    serverMessages: {
+        load: () => Promise<ServerMessage[]>;
+        save: (
+            settings: ServerMessage[]
+        ) => Promise<{ success: boolean; error?: string }>;
     };
 };
 
-type ChatMessages = {
+export type ServerMessage = {
+    id: string;
     enable: boolean;
     sayWhat: string;
     everyMins: number;
-}
+};
 
 declare global {
-    interface Window extends Partial<serverMessagesAPI> {
-        ChatMessages?: serverMessagesAPI["ChatMessages"];
+    interface Window extends Partial<ServerMessagesAPI> {
+        serverMessages?: ServerMessagesAPI["serverMessages"];
     }
 }
 
-function getChatMessagesBridge() {
-    const bridge = window.ChatMessages;
+function getServerMessagesBridge() {
+    const bridge = window.serverMessages;
 
     if (!bridge) {
         throw new Error(
-            "ChatMessages API is not available. Ensure electron preload exposes window.CombinedAdminWhitelist."
+            "serverMessages API is not available. Ensure electron preload exposes window.serverMessages."
         );
     }
     return bridge;
 }
 
-export async function loadChatMessages(): Promise<ChatMessages> {
-    const bridge = getChatMessagesBridge();
+export async function loadServerMessages(): Promise<ServerMessage[]> {
+    const bridge = getServerMessagesBridge();
     const loaded = await bridge.load();
-    return (
-        loaded ?? {
-            enable: true,
-            sayWhat: "",
-            everyMins: 0,
-        }
-    );
+
+    return loaded ?? [];
 }
-export async function saveChatMessages(settings: ChatMessages) {
-    const bridge = getChatMessagesBridge();
+export async function saveServerMessages(settings: ServerMessage[]) {
+    const bridge = getServerMessagesBridge();
     return bridge.save(settings);
 }

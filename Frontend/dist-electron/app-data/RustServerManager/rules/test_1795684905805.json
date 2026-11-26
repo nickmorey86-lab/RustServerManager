@@ -1,0 +1,10 @@
+{
+  "ruleName": "test",
+  "enabled": true,
+  "AmountLastMins": "4",
+  "ViolationRateExceeds": "4",
+  "SameMessageMoreThan": "4",
+  "MaxViolationsBeforeAction": "4",
+  "Action": "Warn",
+  "Message": "test test"
+}

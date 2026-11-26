@@ -1,21 +1,21 @@
 import "./serverMessages.css";
 import {
-    loadChatMessages,
-    saveChatMessages
+    loadServerMessages,
+    saveServerMessages
 } from "../../../../utils/serverMessagesAPI";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { ModalError } from "../../../../components/ModalError/ModalError";
 
 
 
-export interface ChatMessages {
+export interface ServerMessage {
     id: string;
     enable: boolean;
     sayWhat: string;
     everyMins: number;
 }
 export interface MessagesList {
-
+    id: string;
     enable: boolean;
     sayWhat: string;
     everyMins: number;
@@ -24,43 +24,34 @@ export interface MessagesList {
 export function ServerMessages() {
 
     const [settings, setSettings] = useState<MessagesList>({
+        id: crypto.randomUUID(),
         enable: true,
         sayWhat: "",
         everyMins: 0,
     });
 
     const [saveError, setSaveError] = useState<string | null>(null);
-    const [MessageTableRows, setMessageTableRows] = useState<ChatMessages[]>([]);
+    const [messageTableRows, setmessageTableRows] = useState<ServerMessage[]>([]);
+    // const [editingMessageId, setEditingMessageId] = useState<string | null>(null);
 
     useEffect(() => {
         void (async () => {
-            const loaded = await loadChatMessages();
+            const loaded = await loadServerMessages();
             // Store enabled/sayWhat/everyMins in the form inputs
             // and also derive the table rows from that single config.
             if (loaded) {
-                const normalized = {
-                    ...loaded,
-                    enable: Boolean((loaded as any).enable ?? true),
-                    sayWhat: String((loaded as any).sayWhat ?? ""),
-                    everyMins: Number((loaded as any).everyMins ?? 0),
-                };
+                if (loaded.length > 0) {
+                    setmessageTableRows(loaded);
 
-                setSettings(normalized);
+                    const first = loaded[0];
 
-                // For server messages we support multiple rows in the table.
-                // If the backend only provides a single config, we normalize it into one row.
-                const hasAny = normalized.everyMins > 0 || normalized.sayWhat.trim();
-                const rows: ChatMessages[] = hasAny
-                    ? [
-                        {
-                            id: crypto.randomUUID(),
-                            enable: normalized.enable,
-                            sayWhat: normalized.sayWhat,
-                            everyMins: normalized.everyMins,
-                        },
-                    ]
-                    : [];
-                setMessageTableRows(rows);
+                    setSettings({
+                        id: crypto.randomUUID(),
+                        enable: first.enable,
+                        sayWhat: "",
+                        everyMins: 0,
+                    });
+                }
             }
         })();
     }, []);
@@ -72,7 +63,7 @@ export function ServerMessages() {
     const addMessagesToTable = () => {
         // This page is a single-config API, so the table should only contain complete rows.
         if (!settings.enable) {
-            setMessageTableRows([]);
+            setmessageTableRows([]);
             return;
         }
 
@@ -87,36 +78,34 @@ export function ServerMessages() {
         }
 
 
-        const newRow: ChatMessages = {
+        const newRow: ServerMessage = {
             id: crypto.randomUUID(),
             enable: settings.enable,
             sayWhat: settings.sayWhat,
             everyMins: settings.everyMins,
         };
-        setMessageTableRows((rows) => [...rows, newRow]);
+        setmessageTableRows((rows) => [...rows, newRow]);
 
         // Clear input fields after adding.
         setSettings((s) => ({ ...s, sayWhat: "", everyMins: 0 }));
     };
     const removeMessageFromTable = (idToRemove: string) => {
-        setMessageTableRows(MessageTableRows.filter(row => row.id !== idToRemove));
-        // also update form inputs to match table empty state
-        setSettings((s) => ({ ...s, enable: false, sayWhat: "", everyMins: 0 }));
+        setmessageTableRows(
+            messageTableRows.filter(row => row.id !== idToRemove)
+        );
     };
-
-    const newMessageInputRef = useRef<HTMLInputElement | null>(null);
 
     const handleSave = () => {
         setSaveError(null);
         setSuccessMessage(null);
 
         // Validate: table must contain complete rows.
-        if (MessageTableRows.length === 0) {
+        if (messageTableRows.length === 0) {
             setSaveError("Cannot save: add at least one server message line to the table.");
             return;
         }
 
-        for (const row of MessageTableRows) {
+        for (const row of messageTableRows) {
             if (!row.sayWhat.trim()) {
                 setSaveError("Cannot save: each server message row must have message text (sayWhat). ");
                 return;
@@ -129,18 +118,9 @@ export function ServerMessages() {
 
 
         void (async () => {
-            // Backend API expects a single ChatMessages payload (enable/sayWhat/everyMins).
-            // For now we persist the first row.
-            // If backend supports multiple, adjust serverMessagesAPI + preload accordingly.
-            const first = MessageTableRows[0];
-            const payload = {
-                enable: first.enable,
-                sayWhat: first.sayWhat,
-                everyMins: first.everyMins,
-            };
-
             try {
-                const res = await saveChatMessages(payload);
+                const res = await saveServerMessages(messageTableRows);
+
 
                 if (res?.success) {
                     setSaveError(null);
@@ -156,7 +136,7 @@ export function ServerMessages() {
 
 
             } catch (err) {
-                console.error("Exception while saving ChatMessages settings:", err);
+                console.error("Exception while saving serverMessages settings:", err);
                 setSaveError(err instanceof Error ? err.message : String(err));
 
 
@@ -217,7 +197,7 @@ export function ServerMessages() {
             <section className="servermessages-section">
                 <div className="servermessages-section-grid">
                     <div style={{ flex: 1 }}>
-                        <h3 style={{ marginBottom: "10px" }}>Admin Changes Table</h3>
+                        <h3 style={{ marginBottom: "10px" }}>Server Messages</h3>
                         <table border={1} style={{ width: "100%", borderCollapse: "collapse", textAlign: "left" }}>
                             <thead>
                                 <tr>
@@ -227,17 +207,31 @@ export function ServerMessages() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {MessageTableRows.map((row) => (
+                                {messageTableRows.map((row) => (
                                     <tr key={row.id}>
                                         <td style={{ padding: "8px" }}>{row.enable ? "Yes" : "No"}</td>
                                         <td style={{ padding: "8px" }}>{row.sayWhat}</td>
                                         <td style={{ padding: "8px" }}>{row.everyMins}</td>
                                         <td style={{ padding: "8px" }}>
-                                            <button type="button" onClick={() => removeMessageFromTable(row.id)}>❌</button>
+                                            <button
+                                                className="btn-del"
+                                                type="button"
+                                                onClick={() => {
+                                                    if (
+                                                        window.confirm(
+                                                            "Are you sure you want to delete this message?"
+                                                        )
+                                                    ) {
+                                                        removeMessageFromTable(row.id);
+                                                    }
+                                                }}
+                                            >
+                                                Delete
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}
-                                {MessageTableRows.length === 0 && (
+                                {messageTableRows.length === 0 && (
                                     <tr>
                                         <td colSpan={3} style={{ padding: "12px", textAlign: "center", color: "#888" }}>
                                             No messages added yet.

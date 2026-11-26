@@ -55,9 +55,21 @@ Status: Fixed
 
 ## B-005
 
-Status: Investigating
+Status: Fixed
 
 Findings:
 
-- ChatMessages persistence architecture confirmed. Need to inspect JSON contents after save.
+- Existing server messages load correctly from disk.
+- Persistence framework is functioning partially.
+- Deleted messages are restored after application restart.
+- New messages may fail to save when existing messages are present.
+- Issue appears related to update/delete persistence paths rather than initial creation.
+
+## B-006
+
+Status: Investigating
+
+## B-007
+
+Status: Open
   

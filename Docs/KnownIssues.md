@@ -91,7 +91,7 @@ Server Message Persistence
 
 Priority: Critical
 
-Status: Open
+Status: Fixed
 
 Server messages do not persist correctly across application restarts.
 
@@ -101,7 +101,7 @@ Server messages do not persist correctly across application restarts.
 
 Admin Persistence
 
-Priority: High
+Priority: Critical
 
 Status: Open
 
@@ -115,3 +115,57 @@ React state only and are never written to JSON.
 Upon reload only the form fields are restored.
 
 Tables are rebuilt from no data and therefore remain empty.
+
+---
+
+## B-007
+
+Api Services persistance
+
+Priority: High
+
+Status: Open
+
+Not saving data
+
+Root cause investigation areas:
+
+- Browse dialog not opening
+- IPC message failing
+- File picker returning null
+- Save blocked by validation
+
+---
+
+## B-008
+
+Chat rules
+
+Priority: Medium
+
+Status: Open
+
+### Deletion functionality not working correctly
+
+Possible causes:
+
+- Possibly mis-match of storage and detection locations
+- Wrong path
+- Wrong filename
+- Wrong ID lookup
+- Rule already removed from memory but not disk
+
+### Duplicates created after editing existing rule
+
+- Save functionality not set correctly
+
+## B-009
+
+Themeing issues
+
+Priority: Medium
+
+Status: Open
+
+- Themeing not consistent over warnings/notifications/errors/popups
+  
