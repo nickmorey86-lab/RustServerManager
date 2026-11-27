@@ -65,6 +65,18 @@ Findings:
 - New messages may fail to save when existing messages are present.
 - Issue appears related to update/delete persistence paths rather than initial creation.
 
+Resolution:
+
+- Converted ServerMessages persistence from a single-object
+- model to a ServerMessage[] array model
+- Add multiple messages
+- Save
+- Reload application
+- Delete individual messages
+- Save deletion
+- Reload application
+- Data persisted correctly in ServerMessages.json.
+
 ## B-006
 
 Status: Investigating

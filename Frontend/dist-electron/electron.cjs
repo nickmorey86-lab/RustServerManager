@@ -646,12 +646,6 @@ import_electron.ipcMain.handle("CombinedAdminWhitelist:load", () => {
 import_electron.ipcMain.handle("CombinedAdminWhitelist:save", async (_event, settings) => {
   try {
     const errors = [];
-    if (settings.addRemoveAdmin && (!settings.newAdminID || settings.newAdminID <= 0)) {
-      errors.push("Please set the number of hours for IP bans.");
-    }
-    if (settings.enable && (!settings.steamID || settings.steamID <= 0 || !settings.addRemoveList || settings.addRemoveList.trim() === "")) {
-      errors.push("Missing required fields: When enabled, you must provide a valid SteamID and a list selection.");
-    }
     if (errors.length) {
       return { success: false, error: "Missing values found:\n" + errors.join("\n") };
     }

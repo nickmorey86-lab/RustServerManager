@@ -7,8 +7,8 @@
 - [x] GitHub setup
 - [x] Documentation setup
 - [x] Folder structure mapping
-- [ ] Fix ThemeBuilder.tsx errors
-- [ ] Fix Theme Builder lock-up bug
+- [x] Fix ThemeBuilder.tsx errors
+- [x] Fix Theme Builder lock-up bug
 - [ ] Audit settings persistence
 - [ ] Fix Server Message persistence
 - [ ] Fix URL Theme support
@@ -20,3 +20,4 @@
 - [ ] Review Admin persistence
 - [ ] Framework Manager
 - [ ] Server Installer
+- [ ] Project cleanup audit
